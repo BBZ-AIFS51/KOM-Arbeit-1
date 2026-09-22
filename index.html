@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kommunikation Crashkurs</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#FAF9FD; --surface:#FFFFFF; --surface2:#F3F1F9; --ink:#2B2938; --muted:#7A7790; --line:#EAE7F2;
+  --lav:#E2DBF8; --lav-ink:#4B3C99;
+  --mint:#D6F0E2; --mint-ink:#1E6F47;
+  --peach:#FFE0D0; --peach-ink:#A0522D;
+  --sky:#D8E8FA; --sky-ink:#2C5F9E;
+  --butter:#FBF0C6; --butter-ink:#8A6300;
+  --rose:#FADADF; --rose-ink:#B03A4D;
+  --focus:#9C8CE8;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1A1922; --surface:#24232E; --surface2:#2E2D3A; --ink:#ECEAF4; --muted:#A5A2B8; --line:#393846;
+    --lav:#3F3866; --lav-ink:#D6CCFA;
+    --mint:#25423A; --mint-ink:#A6E3C3;
+    --peach:#4A3630; --peach-ink:#FFC9B0;
+    --sky:#2A3C55; --sky-ink:#B7D3F7;
+    --butter:#45401F; --butter-ink:#F5E19A;
+    --rose:#4A2B33; --rose-ink:#F7B6C1;
+    --focus:#B9ADF0;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1A1922; --surface:#24232E; --surface2:#2E2D3A; --ink:#ECEAF4; --muted:#A5A2B8; --line:#393846;
+  --lav:#3F3866; --lav-ink:#D6CCFA;
+  --mint:#25423A; --mint-ink:#A6E3C3;
+  --peach:#4A3630; --peach-ink:#FFC9B0;
+  --sky:#2A3C55; --sky-ink:#B7D3F7;
+  --butter:#45401F; --butter-ink:#F5E19A;
+  --rose:#4A2B33; --rose-ink:#F7B6C1;
+  --focus:#B9ADF0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.55}
+.mono{font-family:"DM Mono",ui-monospace,Consolas,monospace}
+.bi{width:1em;height:1em;vertical-align:-.15em;fill:currentColor;flex:0 0 auto}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:0 56px}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+header.top .wrap{padding-block:14px 10px}
+.brand{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.brand h1{font-size:18px;margin:0;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.brand h1 .bi{color:var(--lav-ink)}
+.brand .timer{font-family:"DM Mono",monospace;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;background:var(--surface);padding:6px 12px;border-radius:999px}
+nav.tabs{display:flex;gap:4px;background:var(--surface);padding:4px;border-radius:14px;overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:1 0 auto;background:none;border:0;border-radius:10px;padding:9px 12px;font:inherit;font-weight:600;font-size:14px;color:var(--muted);cursor:pointer;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:6px}
+nav.tabs button[aria-selected="true"]{color:var(--lav-ink);background:var(--lav)}
+nav.tabs button:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+section.panel{padding-block:18px}
+h2{font-size:24px;margin:0 0 6px;letter-spacing:-.02em;font-weight:700;text-wrap:balance}
+h3{font-size:17px;margin:0 0 6px;font-weight:600;display:flex;align-items:center;gap:8px}
+p{margin:0 0 10px}
+.lead{color:var(--muted);margin-bottom:18px}
+.card{background:var(--surface);border-radius:18px;padding:18px;margin-bottom:12px}
+.card.tint-lav{background:var(--lav);color:var(--lav-ink)} .card.tint-butter{background:var(--butter);color:var(--butter-ink)}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+ul,ol{margin:0 0 10px;padding-left:22px}
+li{margin-bottom:5px}
+.merk{background:var(--surface2);padding:12px 14px;border-radius:12px;margin:10px 0;display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.merk .bi{margin-top:4px;color:var(--butter-ink);font-size:16px}
+.merk.lav{background:var(--lav);color:var(--lav-ink)} .merk.lav .bi{color:var(--lav-ink)}
+.merk.sky{background:var(--sky);color:var(--sky-ink)} .merk.sky .bi{color:var(--sky-ink)}
+.merk.mint{background:var(--mint);color:var(--mint-ink)} .merk.mint .bi{color:var(--mint-ink)}
+.merk.peach{background:var(--peach);color:var(--peach-ink)} .merk.peach .bi{color:var(--peach-ink)}
+.merk.butter{background:var(--butter);color:var(--butter-ink)} .merk.butter .bi{color:var(--butter-ink)}
+.merk.rose{background:var(--rose);color:var(--rose-ink)} .merk.rose .bi{color:var(--rose-ink)}
+.merk b{font-weight:700}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--surface2);color:var(--muted)}
+.pill.AX{background:var(--lav);color:var(--lav-ink)} .pill.VS{background:var(--sky);color:var(--sky-ink)} .pill.IB{background:var(--mint);color:var(--mint-ink)} .pill.SE{background:var(--peach);color:var(--peach-ink)} .pill.TR{background:var(--butter);color:var(--butter-ink)}
+button.btn{font:inherit;font-weight:600;font-size:14px;padding:10px 16px;border-radius:12px;border:0;background:var(--surface2);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+button.btn.primary{background:var(--lav);color:var(--lav-ink)}
+button.btn.mint{background:var(--mint);color:var(--mint-ink)} button.btn.sky{background:var(--sky);color:var(--sky-ink)} button.btn.peach{background:var(--peach);color:var(--peach-ink)} button.btn.butter{background:var(--butter);color:var(--butter-ink)} button.btn.rose{background:var(--rose);color:var(--rose-ink)}
+button.btn.small{padding:7px 12px;font-size:13px}
+button.btn:hover{filter:brightness(.97)}
+button.btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+button.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cover.hidden-content > .cover-body{filter:blur(8px);user-select:none;pointer-events:none}
+.cover .cover-toggle{margin-top:10px}
+.stepgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.step{background:var(--surface2);border-radius:12px;padding:12px;font-size:14px}
+.step .num{font-family:"DM Mono",monospace;font-size:12px;color:var(--muted);margin-bottom:4px;display:flex;align-items:center;gap:5px}
+.step b{display:block;margin-bottom:2px}
+.step.s1{background:var(--lav);color:var(--lav-ink)} .step.s2{background:var(--sky);color:var(--sky-ink)} .step.s3{background:var(--mint);color:var(--mint-ink)} .step.s4{background:var(--butter);color:var(--butter-ink)}
+.step.s1 .num,.step.s2 .num,.step.s3 .num,.step.s4 .num{color:inherit;opacity:.75}
+/* quiz */
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.progress{height:6px;background:var(--surface2);border-radius:999px;overflow:hidden;margin-bottom:16px}
+.progress > div{height:100%;background:var(--lav-ink);opacity:.6;width:0%;transition:width .25s}
+.qtext{font-size:17px;font-weight:600;margin-bottom:14px;text-wrap:pretty;line-height:1.45}
+.opts{display:grid;gap:8px;margin-bottom:12px}
+.opt{text-align:left;font:inherit;font-size:15px;padding:12px 14px;border-radius:12px;border:2px solid transparent;background:var(--surface2);color:var(--ink);cursor:pointer;display:flex;gap:10px;align-items:flex-start;line-height:1.45}
+.opt .k{font-family:"DM Mono",monospace;font-size:12px;color:var(--muted);padding-top:3px;flex:0 0 16px}
+.opt:hover{border-color:var(--lav)}
+.opt:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.opt.correct{background:var(--mint);color:var(--mint-ink)} .opt.correct .k{color:inherit}
+.opt.wrong{background:var(--rose);color:var(--rose-ink)} .opt.wrong .k{color:inherit}
+.opt:disabled{cursor:default}
+.feedback{border-radius:12px;padding:12px 14px;margin-bottom:14px;background:var(--surface2);font-size:15px}
+.feedback.ok{background:var(--mint);color:var(--mint-ink)}
+.feedback.no{background:var(--rose);color:var(--rose-ink)}
+.feedback b{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+/* results */
+.bars{display:grid;gap:10px}
+.bar{display:grid;grid-template-columns:150px 1fr 56px;gap:10px;align-items:center}
+.bar .lbl{font-size:14px;font-weight:600}
+.bar .track{height:10px;background:var(--surface2);border-radius:999px;overflow:hidden}
+.bar .track > div{height:100%;border-radius:999px}
+.bar .pct{font-family:"DM Mono",monospace;font-size:13px;text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.lvl-good{background:var(--mint-ink)} .lvl-warn{background:var(--butter-ink)} .lvl-bad{background:var(--rose-ink)} .lvl-none{background:var(--line)}
+.tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600;font-family:"DM Mono",monospace}
+.tag.good{background:var(--mint);color:var(--mint-ink)} .tag.warn{background:var(--butter);color:var(--butter-ink)} .tag.bad{background:var(--rose);color:var(--rose-ink)}
+@media (max-width:480px){.bar{grid-template-columns:105px 1fr 48px}}
+/* exam */
+details{border-radius:12px;padding:10px 14px;margin:8px 0;background:var(--surface2)}
+details summary{cursor:pointer;font-weight:600;font-size:14px;color:var(--lav-ink);display:flex;align-items:center;gap:6px;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary .bi{transition:transform .15s}
+details[open] summary .bi{transform:rotate(90deg)}
+details[open] summary{margin-bottom:8px}
+.rate{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.rate span{font-size:13px;color:var(--muted);margin-right:4px;display:flex;align-items:center;gap:5px}
+.rate button{font:inherit;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;border:0;background:var(--surface2);color:var(--muted);cursor:pointer}
+.rate button.sel-2{background:var(--mint);color:var(--mint-ink)}
+.rate button.sel-1{background:var(--butter);color:var(--butter-ink)}
+.rate button.sel-0{background:var(--rose);color:var(--rose-ink)}
+.rate button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.pts{font-family:"DM Mono",monospace;font-size:12px;color:var(--muted);white-space:nowrap}
+.task{margin-bottom:12px}
+.task .situ{background:var(--surface2);border-radius:12px;padding:10px 14px;font-size:15px;margin-bottom:8px;line-height:1.5}
+.model p{margin-bottom:6px}
+.model ul,.model ol{margin-bottom:6px}
+.big{font-size:36px;font-weight:700;font-family:"DM Mono",monospace;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.axiom-list li{margin-bottom:8px}
+.axiom-list b{display:block}
+.tip{font-size:13px;color:var(--muted)}
+.area{margin:22px 0 8px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+
+/* ===== motion ===== */
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+section.panel:not([hidden]) > *{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+section.panel:not([hidden]) > *:nth-child(2){animation-delay:.06s}
+section.panel:not([hidden]) > *:nth-child(3){animation-delay:.12s}
+section.panel:not([hidden]) > *:nth-child(4){animation-delay:.18s}
+section.panel:not([hidden]) > *:nth-child(5){animation-delay:.24s}
+section.panel:not([hidden]) > *:nth-child(6){animation-delay:.30s}
+section.panel:not([hidden]) > *:nth-child(7){animation-delay:.36s}
+section.panel:not([hidden]) > *:nth-child(n+8){animation-delay:.42s}
+#quiz-run .qtext,#quiz-run .opts,#quiz-done{animation:pop .3s ease both}
+.card{transition:transform .2s ease}
+.hero{margin-bottom:6px}
+.mhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.mhead h3{margin:0;font-size:19px}
+.mhead .tip{margin-left:auto}
+.bi.big{font-size:26px;margin-bottom:4px}
+
+/* ===== flow (Sender-Empfänger) ===== */
+.flow{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-bottom:14px}
+.node{border-radius:16px;padding:16px 14px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;transition:transform .2s}
+.node:hover{transform:translateY(-2px)}
+.node b{font-size:16px}.node span{font-size:13px;opacity:.8}
+.node.peach{background:var(--peach);color:var(--peach-ink)} .node.sky{background:var(--sky);color:var(--sky-ink)}
+.link{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:150px}
+.link .line{width:100%;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:22px;position:relative}
+.link .line::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--line);z-index:0}
+.link .line .bi{background:var(--surface);position:relative;z-index:1;padding:0 4px}
+.chip{font-size:12px;font-weight:600;background:var(--surface2);color:var(--muted);padding:5px 10px;border-radius:999px;text-align:center;display:inline-flex;align-items:center;gap:5px}
+.chip.warn{background:var(--butter);color:var(--butter-ink)}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.kv .k{background:var(--surface2);border-radius:12px;padding:12px;font-size:14px;line-height:1.45}
+.kv .k b{display:block;margin-bottom:3px;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:560px){.flow{grid-template-columns:1fr}.link{min-width:0}.link .line .bi{transform:rotate(90deg)}}
+
+/* ===== axiom cards ===== */
+.axgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:12px}
+.ax{position:relative;text-align:left;font:inherit;border:0;border-radius:16px;padding:16px 14px 14px;cursor:pointer;display:flex;flex-direction:column;gap:6px;color:inherit;transition:transform .2s ease,box-shadow .2s ease;line-height:1.4}
+.ax:hover{transform:translateY(-3px)}
+.ax:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.ax .n{font-family:"DM Mono",monospace;font-size:28px;font-weight:500;line-height:1;opacity:.55}
+.ax b{font-size:15px;line-height:1.3}
+.ax .hint{font-size:13px;opacity:.85}
+.ax .trig{font-size:12px;font-weight:600;display:flex;gap:5px;align-items:flex-start;margin-top:2px;opacity:.9}
+.ax .trig .bi{margin-top:3px}
+.ax .ex{font-size:13px;background:rgba(255,255,255,.55);border-radius:10px;padding:0 10px;max-height:0;overflow:hidden;opacity:0;transition:max-height .3s ease,opacity .3s ease,padding .3s ease,margin .3s ease}
+.ax.open .ex{max-height:160px;opacity:1;padding:8px 10px;margin-top:4px}
+:root[data-theme="dark"] .ax .ex{background:rgba(0,0,0,.25)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ax .ex{background:rgba(0,0,0,.25)}}
+.ax.lav{background:var(--lav);color:var(--lav-ink)} .ax.sky{background:var(--sky);color:var(--sky-ink)} .ax.mint{background:var(--mint);color:var(--mint-ink)} .ax.peach{background:var(--peach);color:var(--peach-ink)} .ax.butter{background:var(--butter);color:var(--butter-ink)}
+
+/* ===== four sides ===== */
+.msgbubble{background:var(--surface2);border-radius:18px;border-top-left-radius:6px;padding:12px 16px;font-size:16px;font-weight:600;margin:0 auto 12px;max-width:520px;position:relative;line-height:1.4}
+.msgbubble .who{display:block;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.msgbubble.reply{border-top-left-radius:18px;border-top-right-radius:6px;margin-top:12px;font-weight:500}
+.msgbubble.good{background:var(--mint);color:var(--mint-ink);font-weight:500;border-top-left-radius:18px;border-top-right-radius:6px}
+.note{display:flex;gap:6px;align-items:flex-start;font-size:13px;font-weight:500;margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--surface);color:var(--ink);line-height:1.4}
+.note .bi{margin-top:3px;flex:0 0 auto}
+.note.rose{background:var(--rose);color:var(--rose-ink)}
+.four{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px}
+.four .q{border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:3px;transition:transform .2s;line-height:1.35}
+.four .q:hover{transform:scale(1.02)}
+.four .q b{font-size:15px}.four .q i{font-size:12px;opacity:.75;font-style:normal;text-transform:uppercase;letter-spacing:.04em}.four .q span{font-size:14px;margin-top:4px}
+.four .q.sky{background:var(--sky);color:var(--sky-ink)} .four .q.mint{background:var(--mint);color:var(--mint-ink)} .four .q.peach{background:var(--peach);color:var(--peach-ink)} .four .q.lav{background:var(--lav);color:var(--lav-ink)}
+.four .q:nth-child(1){border-bottom-right-radius:6px}.four .q:nth-child(2){border-bottom-left-radius:6px}.four .q:nth-child(3){border-top-right-radius:6px}.four .q:nth-child(4){border-top-left-radius:6px}
+
+/* ===== stepper ===== */
+.stepper{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch;margin-bottom:12px}
+.st{border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:3px;transition:transform .2s;line-height:1.35}
+.st:hover{transform:translateY(-3px)}
+.st .n{font-family:"DM Mono",monospace;font-size:24px;opacity:.55;line-height:1}
+.st b{font-size:15px}.st i{font-size:12px;opacity:.75;font-style:normal}.st .tpl{font-size:13px;font-weight:600;margin-top:6px}
+.st.mint{background:var(--mint);color:var(--mint-ink)} .st.sky{background:var(--sky);color:var(--sky-ink)} .st.lav{background:var(--lav);color:var(--lav-ink)}
+.st-arrow{display:flex;align-items:center;color:var(--muted);font-size:20px}
+@media (max-width:560px){.stepper{grid-template-columns:1fr}.st-arrow{justify-content:center}.st-arrow .bi{transform:rotate(90deg)}}
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-bottom:4px}
+.cmp{border-radius:14px;padding:14px;font-size:14px;line-height:1.45}
+.cmp .lbl{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+.cmp.bad{background:var(--rose);color:var(--rose-ink)} .cmp.good{background:var(--mint);color:var(--mint-ink)}
+.cmp mark{background:rgba(255,255,255,.6);color:inherit;border-radius:4px;padding:0 3px;font-weight:700}
+:root[data-theme="dark"] .cmp mark{background:rgba(0,0,0,.3)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cmp mark{background:rgba(0,0,0,.3)}}
+.cmp .why{display:block;margin-top:8px;font-size:12px;opacity:.85}
+
+/* ===== chat ===== */
+.chat{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.bub{max-width:88%;border-radius:18px;padding:12px 14px;font-size:15px;line-height:1.45;background:var(--surface2);position:relative}
+.bub.left{align-self:flex-start;border-top-left-radius:6px;background:var(--butter);color:var(--butter-ink)}
+.bub.right{align-self:flex-end;border-top-right-radius:6px;background:var(--sky);color:var(--sky-ink)}
+.bub.ghost{background:var(--surface2);color:var(--muted);border:1.5px dashed var(--line)}
+.bub.fix{align-self:stretch;max-width:100%;background:var(--mint);color:var(--mint-ink)}
+.bub .who{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;opacity:.75;margin-bottom:3px}
+.bub .note{background:var(--surface);color:var(--ink)}
+.bub .note.rose{background:var(--rose);color:var(--rose-ink)}
+@media (prefers-reduced-motion: reduce){section.panel:not([hidden]) > *,#quiz-run .qtext,#quiz-run .opts,#quiz-done{animation:none}}
+[hidden]{display:none!important}
+</style>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="bi-arrow-repeat" viewBox="0 0 16 16"><path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/> <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/></symbol><symbol id="bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></symbol><symbol id="bi-bar-chart-fill" viewBox="0 0 16 16"><path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/></symbol><symbol id="bi-bullseye" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/> <path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10m0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/> <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/> <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/></symbol><symbol id="bi-chat-dots" viewBox="0 0 16 16"><path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/> <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9 9 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.4 10.4 0 0 1-.524 2.318l-.003.011a11 11 0 0 1-.244.637c-.079.186.074.394.273.362a22 22 0 0 0 .693-.125m.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6-3.004 6-7 6a8 8 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a11 11 0 0 0 .398-2"/></symbol><symbol id="bi-chat-left-quote" viewBox="0 0 16 16"><path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/> <path d="M7.066 4.76A1.665 1.665 0 0 0 4 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112zm4 0A1.665 1.665 0 0 0 8 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112z"/></symbol><symbol id="bi-check-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></symbol><symbol id="bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/></symbol><symbol id="bi-clock" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/> <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/></symbol><symbol id="bi-diagram-3" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/></symbol><symbol id="bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z"/> <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/></symbol><symbol id="bi-eye-slash" viewBox="0 0 16 16"><path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7 7 0 0 0-2.79.588l.77.771A6 6 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755q-.247.248-.517.486z"/> <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829"/> <path d="M3.35 5.47q-.27.24-.518.487A13 13 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7 7 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12z"/></symbol><symbol id="bi-eye" viewBox="0 0 16 16"><path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/> <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/></symbol><symbol id="bi-file-earmark-text" viewBox="0 0 16 16"><path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/> <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></symbol><symbol id="bi-flag" viewBox="0 0 16 16"><path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12 12 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A20 20 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a20 20 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21 21 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21 21 0 0 0 14 7.655V1.222z"/></symbol><symbol id="bi-hand-thumbs-up" viewBox="0 0 16 16"><path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2 2 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a10 10 0 0 0-.443.05 9.4 9.4 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a9 9 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.2 2.2 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.9.9 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/></symbol><symbol id="bi-journal-text" viewBox="0 0 16 16"><path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/> <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/> <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/></symbol><symbol id="bi-lightbulb" viewBox="0 0 16 16"><path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/></symbol><symbol id="bi-lightning-charge" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41z"/></symbol><symbol id="bi-list-ol" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5"/> <path d="M1.713 11.865v-.474H2c.217 0 .363-.137.363-.317 0-.185-.158-.31-.361-.31-.223 0-.367.152-.373.31h-.59c.016-.467.373-.787.986-.787.588-.002.954.291.957.703a.595.595 0 0 1-.492.594v.033a.615.615 0 0 1 .569.631c.003.533-.502.8-1.051.8-.656 0-1-.37-1.008-.794h.582c.008.178.186.306.422.309.254 0 .424-.145.422-.35-.002-.195-.155-.348-.414-.348h-.3zm-.004-4.699h-.604v-.035c0-.408.295-.844.958-.844.583 0 .96.326.96.756 0 .389-.257.617-.476.848l-.537.572v.03h1.054V9H1.143v-.395l.957-.99c.138-.142.293-.304.293-.508 0-.18-.147-.32-.342-.32a.33.33 0 0 0-.342.338zM2.564 5h-.635V2.924h-.031l-.598.42v-.567l.629-.443h.635z"/></symbol><symbol id="bi-patch-question" viewBox="0 0 16 16"><path d="M8.05 9.6c.336 0 .504-.24.554-.627.04-.534.198-.815.847-1.26.673-.475 1.049-1.09 1.049-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.7 1.7 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745"/> <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911z"/> <path d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0"/></symbol><symbol id="bi-person-workspace" viewBox="0 0 16 16"><path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/> <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/></symbol><symbol id="bi-play-fill" viewBox="0 0 16 16"><path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/></symbol><symbol id="bi-stopwatch" viewBox="0 0 16 16"><path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z"/> <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.012-.013.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5M8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3"/></symbol><symbol id="bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/></symbol><symbol id="bi-x-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/></symbol></svg>
+
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand">
+    <h1><svg class="bi"><use href="#bi-chat-dots"/></svg>Kommunikation Crashkurs</h1>
+    <span class="timer"><svg class="bi"><use href="#bi-stopwatch"/></svg><span id="clockv">30:00</span></span>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="spick"><svg class="bi"><use href="#bi-journal-text"/></svg>Spickzettel</button>
+    <button role="tab" aria-selected="false" data-tab="quiz"><svg class="bi"><use href="#bi-patch-question"/></svg>Quiz</button>
+    <button role="tab" aria-selected="false" data-tab="exam"><svg class="bi"><use href="#bi-file-earmark-text"/></svg>Probeklausur</button>
+    <button role="tab" aria-selected="false" data-tab="eval"><svg class="bi"><use href="#bi-bar-chart-fill"/></svg>Schwachpunkte</button>
+  </nav>
+</div></header>
+
+<main class="wrap">
+
+<!-- ============ SPICKZETTEL ============ -->
+<section class="panel" id="panel-spick">
+  <div class="hero">
+    <h2>Das musst du in 30 Minuten drauf haben</h2>
+    <p class="lead">Die Klausur hat 3 Teile: <b>I Wissen</b> (Modelle erklären, 5 Axiome nennen), <b>II Anwenden</b> (Vier Seiten auf eine Chat-Nachricht, Axiome zu Fällen zuordnen), <b>III Beurteilen</b> (Fall analysieren, Ich-Botschaft schreiben).</p>
+    <div class="stepgrid">
+      <div class="step s1"><div class="num">01 · 8 Min</div><b>Spickzettel</b>5 Axiome und 4 Seiten laut aufsagen.</div>
+      <div class="step s2"><div class="num">02 · 12 Min</div><b>Quiz</b>Falsche Antworten lesen. Das sind deine Lücken.</div>
+      <div class="step s3"><div class="num">03 · 8 Min</div><b>Probeklausur</b>Musterlösungen zu Aufgabe 3, 4 und 6.</div>
+      <div class="step s4"><div class="num">04 · 2 Min</div><b>Schwachpunkte</b>Das Schwächste nochmal ansehen.</div>
+    </div>
+  </div>
+
+  <!-- ===== Modell 1: Sender-Empfänger als Flow ===== -->
+  <div class="card model">
+    <div class="mhead"><span class="pill SE"><svg class="bi"><use href="#bi-diagram-3"/></svg>Modell 1</span><h3>Sender-Empfänger</h3></div>
+    <div class="flow">
+      <div class="node peach"><svg class="bi big"><use href="#bi-person-workspace"/></svg><b>Sender</b><span>verschlüsselt die Nachricht</span></div>
+      <div class="link">
+        <span class="chip">Medium · Chat, Telefon, Ticket</span>
+        <div class="line"><svg class="bi"><use href="#bi-arrow-right"/></svg></div>
+        <span class="chip">Protokoll · Sprache, Zeichensystem</span>
+        <span class="chip warn"><svg class="bi"><use href="#bi-lightning-charge"/></svg>Störung · fehlende Info · Annahme</span>
+      </div>
+      <div class="node sky"><svg class="bi big"><use href="#bi-person-workspace"/></svg><b>Empfänger</b><span>entschlüsselt und interpretiert</span></div>
+    </div>
+    <div class="kv">
+      <div class="k"><b>Kernsatz</b>Nicht „ich hab's gesagt" zählt, sondern „hat der andere es richtig verstanden?"</div>
+      <div class="k"><b>Analyse-Schema</b>1. Was wurde gesendet? 2. Welche Annahme hat der Empfänger ergänzt? 3. Folgen? 4. Bessere Nachricht / Rückfrage.</div>
+      <div class="k"><b>Ticket: 3 Pflicht-Infos</b>Was genau (Symptom, Fehlermeldung, System) · Seit wann / was wurde geändert · Wer betroffen, wie dringend.</div>
+    </div>
+  </div>
+
+  <!-- ===== Modell 2: 5 Axiome als Karten ===== -->
+  <div class="card model cover" id="cov-ax">
+    <div class="mhead"><span class="pill AX"><svg class="bi"><use href="#bi-list-ol"/></svg>Modell 2 · Watzlawick</span><h3>Die 5 Axiome</h3><span class="tip">Tippe eine Karte für das Beispiel</span></div>
+    <div class="cover-body">
+      <div class="axgrid">
+        <button type="button" class="ax lav"><span class="n">1</span><b>Man kann nicht nicht kommunizieren</b><span class="hint">Auch Schweigen, Wegschauen, Kamera aus ist eine Botschaft.</span><span class="trig"><svg class="bi"><use href="#bi-bullseye"/></svg>Erkennst du an: keine Antwort, „Von mir aus."</span><span class="ex">Admin wird gefragt, schaltet die Kamera aus, sagt nichts. Botschaft: Desinteresse, Ablehnung.</span></button>
+        <button type="button" class="ax sky"><span class="n">2</span><b>Inhalts- und Beziehungsaspekt</b><span class="hint">Jede Nachricht = Sachinfo + „wie stehe ich zu dir". Die Beziehung bestimmt, wie der Inhalt ankommt.</span><span class="trig"><svg class="bi"><use href="#bi-bullseye"/></svg>Erkennst du an: „behandelst mich als wäre ich unfähig"</span><span class="ex">„In der Doku fehlt die IP." Antwort: „Du musst mich nicht wie einen Idioten behandeln."</span></button>
+        <button type="button" class="ax mint"><span class="n">3</span><b>Ursache und Wirkung (Interpunktion)</b><span class="hint">Jeder sieht sein Verhalten nur als Reaktion auf den anderen. Ergebnis: Teufelskreis.</span><span class="trig"><svg class="bi"><use href="#bi-bullseye"/></svg>Erkennst du an: „Ich mache X nur, weil du Y machst"</span><span class="ex">A kontrolliert, weil B Fehler macht. B macht Fehler, weil A kontrolliert. Eskalationsspirale.</span></button>
+        <button type="button" class="ax peach"><span class="n">4</span><b>Digital und analog</b><span class="hint">Digital = Worte. Analog = Tonfall, Mimik, Körpersprache, Emojis. Bei Widerspruch gewinnt das Analoge.</span><span class="trig"><svg class="bi"><use href="#bi-bullseye"/></svg>Erkennst du an: Worte vs. Emoji / Tonfall</span><span class="ex">„Interessante Lösung." + 🙄. Die Worte sind neutral, das Emoji wertet ab.</span></button>
+        <button type="button" class="ax butter"><span class="n">5</span><b>Symmetrisch oder komplementär</b><span class="hint">Symmetrisch = gleiche Ebene (Kollegen). Komplementär = unterschiedliche Rollen (Chef ↔ Azubi).</span><span class="trig"><svg class="bi"><use href="#bi-bullseye"/></svg>Erkennst du an: Augenhöhe vs. Anweisung</span><span class="ex">Zwei Admins diskutieren gleichberechtigt. Danach gibt einer dem Azubi eine Anweisung.</span></button>
+      </div>
+      <div class="merk lav"><svg class="bi"><use href="#bi-lightbulb"/></svg><div><b>Eselsbrücke „NIUDS":</b> <b>N</b>icht-nicht · <b>I</b>nhalt/Beziehung · <b>U</b>rsache/Wirkung · <b>D</b>igital/analog · <b>S</b>ymmetrisch/komplementär</div></div>
+    </div>
+    <button class="btn small cover-toggle" data-cover="cov-ax"><svg class="bi"><use href="#bi-eye-slash"/></svg>Abdecken &amp; selbst aufsagen</button>
+  </div>
+
+  <!-- ===== Modell 3: Vier Seiten ===== -->
+  <div class="card model cover" id="cov-vs">
+    <div class="mhead"><span class="pill VS"><svg class="bi"><use href="#bi-chat-dots"/></svg>Modell 3 · Schulz von Thun</span><h3>Vier-Seiten-Modell</h3><span class="tip">4 Schnäbel senden, 4 Ohren hören</span></div>
+    <div class="cover-body">
+      <div class="msgbubble"><span class="who">Admin im Teamchat</span>„Der Dienst ist schon wieder nicht erreichbar."</div>
+      <div class="four">
+        <div class="q sky"><b>Sachinhalt</b><i>Worüber informiere ich?</i><span>Der Dienst ist down. Nicht zum ersten Mal.</span></div>
+        <div class="q mint"><b>Selbstoffenbarung</b><i>Was zeige ich von mir?</i><span>Ich bin genervt, gestresst, unter Druck.</span></div>
+        <div class="q peach"><b>Beziehung</b><i>Was halte ich von dir?</i><span>„Du arbeitest nicht sauber. Ich trau dir das nicht zu."</span></div>
+        <div class="q lav"><b>Appell</b><i>Was will ich erreichen?</i><span>„Behebe das sofort. Sorg dafür, dass es nicht wieder passiert."</span></div>
+      </div>
+      <div class="msgbubble reply"><span class="who">Kollege antwortet</span>„Wenn du meinst, dass du es besser kannst, mach es doch selbst."<span class="note rose"><svg class="bi"><use href="#bi-exclamation-triangle"/></svg>Hat auf dem <b>Beziehungsohr</b> gehört: verteidigt sich, geht nicht auf die Sache ein.</span></div>
+      <div class="msgbubble good"><span class="who">Sachliche Antwort wäre</span>„Ich schau sofort nach. Seit wann ist er down, gibt es eine Fehlermeldung? Ich melde mich in 10 Minuten mit dem Stand."</div>
+      <div class="merk sky"><svg class="bi"><use href="#bi-lightbulb"/></svg><div><b>Eselsbrücke „SSBA":</b> <b>S</b>ach · <b>S</b>elbst · <b>B</b>eziehung · <b>A</b>ppell. Missverständnis = andere Seite gehört als gemeint.</div></div>
+    </div>
+    <button class="btn small cover-toggle" data-cover="cov-vs"><svg class="bi"><use href="#bi-eye-slash"/></svg>Abdecken &amp; selbst aufsagen</button>
+  </div>
+
+  <!-- ===== Modell 4: Ich-Botschaft Stepper ===== -->
+  <div class="card model cover" id="cov-ib">
+    <div class="mhead"><span class="pill IB"><svg class="bi"><use href="#bi-chat-left-quote"/></svg>Modell 4</span><h3>Ich-Botschaft</h3><span class="tip">Deutlich, aber ohne Angriff</span></div>
+    <div class="cover-body">
+      <div class="stepper">
+        <div class="st mint"><span class="n">1</span><b>Wahrnehmung</b><i>konkret, ohne Wertung</i><span class="tpl">„Mir ist aufgefallen, dass gestern …"</span></div>
+        <div class="st-arrow"><svg class="bi"><use href="#bi-arrow-right"/></svg></div>
+        <div class="st sky"><span class="n">2</span><b>Gefühl / Problem + Begründung</b><i>was es bei mir auslöst und warum</i><span class="tpl">„Das ist für mich ein Problem, weil …"</span></div>
+        <div class="st-arrow"><svg class="bi"><use href="#bi-arrow-right"/></svg></div>
+        <div class="st lav"><span class="n">3</span><b>Wunsch / Lösung</b><i>konkret und umsetzbar</i><span class="tpl">„Ich möchte, dass wir ab jetzt …"</span></div>
+      </div>
+      <div class="compare">
+        <div class="cmp bad"><span class="lbl"><svg class="bi"><use href="#bi-x-circle-fill"/></svg>Verkleideter Vorwurf</span>„Ich finde, du solltest <mark>endlich</mark> aufhören, <mark>ständig</mark> ohne Absprache am Prod-System <mark>herumzufummeln</mark>."<span class="why">Nur „Ich finde" davor. Verallgemeinerungen, Abwertung, keine Wahrnehmung, kein Gefühl, kein Wunsch.</span></div>
+        <div class="cmp good"><span class="lbl"><svg class="bi"><use href="#bi-check-circle-fill"/></svg>Echte Ich-Botschaft</span>„Mir ist aufgefallen, dass gestern die Konfiguration am Prod-System geändert wurde, ohne Eintrag im Ticket. Das ist für mich ein Problem, weil ich bei einer Störung nicht nachvollziehen kann, was passiert ist. Ich möchte, dass wir Änderungen vorher kurz absprechen und im Change-Log dokumentieren."</div>
+      </div>
+      <div class="merk rose"><svg class="bi"><use href="#bi-exclamation-triangle"/></svg><div><b>Warnwörter:</b> immer · nie · ständig · endlich · schon wieder. Wenn die drin sind, ist es ein Vorwurf.</div></div>
+    </div>
+    <button class="btn small cover-toggle" data-cover="cov-ib"><svg class="bi"><use href="#bi-eye-slash"/></svg>Abdecken &amp; selbst aufsagen</button>
+  </div>
+
+  <!-- ===== Der große Fall als Chat ===== -->
+  <div class="card model">
+    <div class="mhead"><span class="pill TR"><svg class="bi"><use href="#bi-lightning-charge"/></svg>Transfer-Fall · Teil III</span><h3>Freitag, 15:45 Uhr</h3><span class="tip">Kommt sehr wahrscheinlich dran</span></div>
+    <div class="chat">
+      <div class="bub left"><span class="who">Teamleitung · 15:45</span>Kann sich bitte endlich jemand darum kümmern?<span class="note rose"><b>Sender-Empfänger:</b> „jemand" = keine Zuständigkeit, kein Dienst, keine Frist. <b>Vier Seiten:</b> „endlich" = Vorwurf auf der Beziehungsebene.</span></div>
+      <div class="bub right ghost"><span class="who">Admin A</span><i>… antwortet nicht</i><span class="note"><b>Annahme ergänzt:</b> „B ist zuständig." Niemand handelt.</span></div>
+      <div class="bub right"><span class="who">Admin B</span>Ich habe heute schon genug Probleme von anderen Leuten gelöst.<span class="note rose"><b>Beziehungsohr:</b> fühlt sich angegriffen, verteidigt sich statt zu handeln.</span></div>
+      <div class="bub left"><span class="who">Teamleitung</span>Genau diese Einstellung meine ich.<span class="note rose"><b>Axiom 3:</b> Vorwurf → Abwehr → Vorwurf. Eskalationsspirale, Dienst bleibt offline.</span></div>
+      <div class="bub fix"><span class="who"><svg class="bi"><use href="#bi-check-circle-fill"/></svg>So wäre es besser</span>@B: Dienst X ist seit 15:40 nicht erreichbar, Prio 1. Bitte übernimm du die Störung. @A: unterstütze bitte bei Bedarf. Bis 16:00 brauche ich hier im Chat eine kurze Rückmeldung zum Stand.<span class="note"><b>Checkliste:</b> Wer (@) · Was · Seit wann · Prio · Bis wann Rückmeldung · Wo</span></div>
+    </div>
+    <div class="merk butter"><svg class="bi"><use href="#bi-lightbulb"/></svg><div><b>In der Klausur immer:</b> zwei Modelle nutzen, sagen was jedes sichtbar macht, und eine Grenze nennen (Modelle erklären das Missverständnis, lösen aber nicht das technische Problem und klären keine Zuständigkeit).</div></div>
+  </div>
+
+  <div class="row" style="justify-content:center;margin-top:10px">
+    <button class="btn primary" id="go-quiz"><svg class="bi"><use href="#bi-play-fill"/></svg>Jetzt Quiz starten</button>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="panel" id="panel-quiz" hidden>
+  <h2>Quiz</h2>
+  <p class="lead">Direktes Feedback nach jeder Antwort. Am Ende siehst du, welche Themen wackeln.</p>
+  <div id="quiz-start" class="card">
+    <div class="row">
+      <button class="btn primary" id="q-all"><svg class="bi"><use href="#bi-play-fill"/></svg>Alle Fragen (ca. 10 Min)</button>
+      <button class="btn rose" id="q-weak"><svg class="bi"><use href="#bi-bullseye"/></svg>Nur Schwachpunkte</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn small" id="q-ax">Axiome</button>
+      <button class="btn small" id="q-vs">Vier Seiten</button>
+      <button class="btn small" id="q-ib">Ich-Botschaft</button>
+      <button class="btn small" id="q-se">Sender-Empfänger</button>
+      <button class="btn small" id="q-tr">Transfer-Fall</button>
+    </div>
+    <p class="tip" style="margin-top:12px;margin-bottom:0" id="q-tip">Tipp: Erst „Alle Fragen", dann „Nur Schwachpunkte".</p>
+  </div>
+  <div id="quiz-run" class="card" hidden>
+    <div class="qhead">
+      <span class="pill" id="q-topic">Thema</span>
+      <span class="mono" id="q-count" style="font-size:13px;color:var(--muted)">1 / 40</span>
+    </div>
+    <div class="progress"><div id="q-prog"></div></div>
+    <div class="qtext" id="q-text"></div>
+    <div class="opts" id="q-opts"></div>
+    <div id="q-fb" class="feedback" hidden></div>
+    <div class="row" style="justify-content:space-between">
+      <button class="btn small" id="q-quit">Abbrechen</button>
+      <button class="btn primary" id="q-next" disabled>Weiter<svg class="bi"><use href="#bi-arrow-right"/></svg></button>
+    </div>
+  </div>
+  <div id="quiz-done" class="card" hidden>
+    <div class="eyebrow"><svg class="bi"><use href="#bi-flag"/></svg>Ergebnis</div>
+    <div class="big" id="q-score">0 / 0</div>
+    <p id="q-verdict"></p>
+    <div class="bars" id="q-bars"></div>
+    <div class="row" style="margin-top:16px">
+      <button class="btn rose" id="q-again-weak"><svg class="bi"><use href="#bi-bullseye"/></svg>Schwachpunkte wiederholen</button>
+      <button class="btn" id="q-again-all"><svg class="bi"><use href="#bi-arrow-repeat"/></svg>Nochmal alles</button>
+      <button class="btn sky" id="q-to-exam"><svg class="bi"><use href="#bi-file-earmark-text"/></svg>Zur Probeklausur</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBEKLAUSUR ============ -->
+<section class="panel" id="panel-exam" hidden>
+  <h2>Probeklausur mit Musterlösungen</h2>
+  <p class="lead">Das ist die Übungsklausur deines Lehrers. Lies die Aufgabe, überleg kurz, klapp die Musterlösung auf und bewerte dich ehrlich. Die Bewertung fließt in deine Schwachpunkte.</p>
+  <div class="card tint-butter">
+    <div class="row" style="align-items:flex-start;flex-wrap:nowrap;gap:10px"><svg class="bi" style="margin-top:4px"><use href="#bi-exclamation-triangle"/></svg><div><b>Wichtig:</b> Die echte Klausur ist kürzer: je eine große Aufgabe aus Teil I, II und III. Prio: <b>Aufgabe 2 (Axiome nennen), Aufgabe 3 oder 4 (Anwenden), Aufgabe 5 oder 6 (Fall / Ich-Botschaft)</b>.</div></div>
+  </div>
+  <div id="exam-list"></div>
+</section>
+
+<!-- ============ AUSWERTUNG ============ -->
+<section class="panel" id="panel-eval" hidden>
+  <h2>Deine Schwachpunkte</h2>
+  <p class="lead">Aus Quiz-Antworten und deiner Selbstbewertung in der Probeklausur.</p>
+  <div class="card">
+    <div class="bars" id="e-bars"></div>
+    <p class="tip" style="margin:12px 0 0">Grün ≥ 75 % sicher · Gelb 50–74 % · Rot &lt; 50 % · Grau = noch nichts gemacht</p>
+  </div>
+  <div class="card" id="e-advice"></div>
+  <div class="card">
+    <div class="eyebrow"><svg class="bi"><use href="#bi-bar-chart-fill"/></svg>Geschätzte Klausurpunkte</div>
+    <div class="big" id="e-points">– / 70</div>
+    <p class="tip">Aus deiner Selbstbewertung in der Probeklausur (Sicher = volle Punkte, Halb = 50 %, Nein = 0). Nur eine grobe Orientierung.</p>
+    <div class="row"><button class="btn small" id="e-reset"><svg class="bi"><use href="#bi-trash3"/></svg>Alles zurücksetzen</button></div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var TOPICS={AX:"Axiome (Watzlawick)",VS:"Vier Seiten",IB:"Ich-Botschaft",SE:"Sender-Empfänger",TR:"Transfer-Fall"};
+  function icon(n){return '<svg class="bi"><use href="#bi-'+n+'"/></svg>';}
+
+  var Q=[
+    // ---- Sender-Empfänger
+    {t:"SE",q:"Was bedeutet „Medium" im Sender-Empfänger-Modell?",o:["Die Sprache, in der gesprochen wird","Der Kanal, über den die Nachricht läuft (Chat, Telefon, E-Mail, Ticket)","Der Inhalt der Nachricht"],a:1,e:"Medium = Übertragungsweg. Das Protokoll ist das Zeichensystem (z. B. Deutsch), nicht der Kanal."},
+    {t:"SE",q:"Was ist im Sender-Empfänger-Modell das „Protokoll"?",o:["Das Zeichensystem / die Sprache (Deutsch, Englisch, Fachbegriffe)","Das Netzwerkprotokoll wie TCP/IP","Ein Gesprächsprotokoll, das man mitschreibt"],a:0,e:"Protokoll = gemeinsames Zeichensystem. Wenn Sender und Empfänger es unterschiedlich benutzen, entsteht ein Missverständnis."},
+    {t:"SE",q:"Kernaussage des Sender-Empfänger-Modells?",o:["Hauptsache, ich habe es klar gesagt.","Kommunikation ist erst gelungen, wenn der Empfänger es richtig verstanden hat.","Der Empfänger ist immer schuld, wenn er etwas falsch versteht."],a:1,e:"Nicht „gesagt" zählt, sondern „richtig verstanden". Zwischen Sender und Empfänger entstehen Störungen und Annahmen."},
+    {t:"SE",q:"„Der Webserver macht wieder Probleme. Starte ihn bitte neu." Der Kollege startet die ganze VM neu. Was ist das Kernproblem?",o:["Der Kollege hat nicht zugehört.","Die Nachricht war unpräzise, der Empfänger hat eine eigene Annahme ergänzt (VM statt Webdienst).","Der Admin hätte ein Ticket schreiben müssen statt Chat."],a:1,e:"Analyse-Schema: gesendet = „Webserver neu starten", ergänzte Annahme = „ganze VM", Folge = mehrere Dienste unterbrochen. Besser: „Nur den Webdienst auf SRV-WEB01 neu starten, nicht die VM."},
+    {t:"SE",q:"Ticket: „VPN geht nicht." Support setzt das Passwort zurück, tatsächlich fehlte nur Zugriff auf eine App. Welche Rückfrage wäre professionell gewesen?",o:["„Hast du es schon mal aus- und wieder eingeschaltet?"","„Was genau passiert? Kannst du dich mit dem VPN verbinden, und welche Anwendung erreichst du nicht? Gibt es eine Fehlermeldung?"","„Bitte schreib das nächste Mal genauer.""],a:1,e:"Eine gute Rückfrage holt die fehlenden Infos: Symptom, Fehlermeldung, betroffenes System. Vorwürfe helfen nicht."},
+    {t:"SE",q:"Welche Info gehört NICHT zu den drei Pflichtangaben einer Störungsmeldung?",o:["Was genau passiert (Symptom, Fehlermeldung, betroffenes System)","Seit wann / was wurde vorher geändert oder schon versucht","Wie viele Jahre Berufserfahrung der Melder hat","Wer ist betroffen, wie dringend, Kontakt"],a:2,e:"Merke: Was genau? Seit wann / was wurde geändert? Wer ist betroffen und wie dringend?"},
+    {t:"SE",q:"„Bitte die Updates heute noch einspielen." Mitarbeiter aktualisiert sofort den Prod-Server, Wartungsfenster war 22 Uhr. Was fehlte in der Nachricht?",o:["Ein freundlicher Gruß","Zeitpunkt und Rahmen: „im Wartungsfenster ab 22 Uhr, nicht vorher"","Die Anzahl der Updates"],a:1,e:"„Heute noch" ist unvollständig. Der Empfänger hat „sofort" ergänzt. Folge: Produktivbetrieb tagsüber gestört."},
+
+    // ---- Axiome
+    {t:"AX",q:"Wie viele Axiome hat Watzlawick formuliert?",o:["3","4","5","7"],a:2,e:"Fünf: Nicht-nicht · Inhalt/Beziehung · Ursache/Wirkung · digital/analog · symmetrisch/komplementär."},
+    {t:"AX",q:"Videokonferenz: Admin wird gefragt, schaltet Kamera aus, antwortet nicht, später nur „Von mir aus." Welches Axiom passt am stärksten?",o:["Man kann nicht nicht kommunizieren","Kommunikation ist digital und analog","Kommunikation ist symmetrisch oder komplementär"],a:0,e:"Kamera aus, Schweigen, knappes „Von mir aus" senden trotzdem eine Botschaft: Desinteresse, Widerwille, Ablehnung."},
+    {t:"AX",q:"A: „Ich kontrolliere dich, weil du ständig Fehler machst." B: „Ich mache Fehler, weil du mir nichts zutraust." Welches Axiom?",o:["Inhalts- und Beziehungsaspekt","Kommunikation ist Ursache und Wirkung (Interpunktion / Teufelskreis)","Digital und analog"],a:1,e:"Jeder sieht sein Verhalten nur als Reaktion auf den anderen. Klassischer Teufelskreis: Kontrolle → Unsicherheit → Fehler → mehr Kontrolle."},
+    {t:"AX",q:"Teamleitung schreibt „Interessante Lösung." plus Augenrollen-Emoji 🙄. Welches Axiom erklärt das am stärksten?",o:["Symmetrisch oder komplementär","Man kann nicht nicht kommunizieren","Digital und analog: Worte (neutral) und Emoji (abwertend) widersprechen sich, das Analoge gewinnt"],a:2,e:"Digital = die Worte, analog = Emoji/Tonfall. Bei Widerspruch glaubt man dem Analogen. Auch vertretbar: Axiom 2 (Beziehungsbotschaft), aber der Wort-Emoji-Widerspruch ist der Mechanismus."},
+    {t:"AX",q:"Zwei erfahrene Admins diskutieren auf Augenhöhe. Danach gibt einer einem Azubi eine verbindliche Anweisung. Welches Axiom?",o:["Symmetrisch (Augenhöhe) vs. komplementär (Anweisung an Azubi)","Ursache und Wirkung","Inhalts- und Beziehungsaspekt"],a:0,e:"Dieselbe Person wechselt die Rolle: unter Kollegen symmetrisch, gegenüber dem Azubi komplementär."},
+    {t:"AX",q:"„In der Doku fehlt die neue IP-Adresse." Antwort: „Du musst mich nicht behandeln, als wäre ich unfähig." Welches Axiom?",o:["Digital und analog","Inhalts- und Beziehungsaspekt: der Inhalt ist sachlich, der Empfänger hört eine Beziehungsbotschaft","Symmetrisch oder komplementär"],a:1,e:"Sachinhalt: IP fehlt. Empfänger reagiert auf die (vermutete) Beziehungsbotschaft „du bist unfähig"."},
+    {t:"AX",q:"Was ist im 4. Axiom „analog"?",o:["Die gesprochenen oder geschriebenen Worte","Tonfall, Mimik, Gestik, Körpersprache, Emojis","Die technische Übertragung ohne Computer"],a:1,e:"Digital = Worte (eindeutig, Inhalt). Analog = wie es gesagt wird (mehrdeutig, Beziehung)."},
+    {t:"AX",q:"„Symmetrisch" bedeutet im 5. Axiom:",o:["Beide Gesprächspartner sind auf gleicher Ebene (z. B. Kollegen)","Einer hat mehr Macht als der andere (z. B. Chef ↔ Azubi)","Beide sagen dasselbe"],a:0,e:"Symmetrisch = gleichrangig. Komplementär = unterschiedliche, sich ergänzende Rollen. Problem: Azubi diskutiert mit dem Meister wie mit einem Freund."},
+    {t:"AX",q:"Welche Aussage ist KEIN Axiom von Watzlawick?",o:["Man kann nicht nicht kommunizieren","Kommunikation ist immer ehrlich und eindeutig","Jede Kommunikation hat einen Inhalts- und Beziehungsaspekt","Kommunikation ist digital und analog"],a:1,e:"Die fünf: Nicht-nicht · Inhalt/Beziehung · Ursache/Wirkung · digital/analog · symmetrisch/komplementär."},
+    {t:"AX",q:"Axiom 3: Was passiert, wenn im Fall „Kontrolle ↔ Fehler" niemand sein Verhalten ändert?",o:["Der Konflikt löst sich von allein","Die Spirale eskaliert weiter: mehr Kontrolle, mehr Unsicherheit, mehr Fehler, mehr Kontrolle","B macht irgendwann keine Fehler mehr"],a:1,e:"Ursache und Wirkung verstärken sich gegenseitig. Nur wer aussteigt (z. B. per Ich-Botschaft), unterbricht die Spirale."},
+    {t:"AX",q:"Was sagt das 2. Axiom über die Beziehungsebene?",o:["Sie ist unwichtig, solange der Inhalt stimmt","Sie bestimmt, wie der Inhalt verstanden wird","Sie existiert nur bei Konflikten"],a:1,e:"Die Beziehung ist der Rahmen: Dieselbe Sachaussage kommt von einem Freund anders an als vom genervten Chef."},
+
+    // ---- Vier Seiten
+    {t:"VS",q:"Welche vier Seiten hat eine Nachricht nach Schulz von Thun?",o:["Sachinhalt, Selbstoffenbarung, Beziehung, Appell","Inhalt, Medium, Protokoll, Empfänger","Sachinhalt, Gefühl, Macht, Wunsch"],a:0,e:"Merke SSBA: Sach · Selbst · Beziehung · Appell."},
+    {t:"VS",q:"„Der Dienst ist schon wieder nicht erreichbar." Was ist die Sachebene?",o:["„Du machst deine Arbeit nicht sauber."","Der Dienst ist nach dem Deployment nicht erreichbar, und das ist nicht das erste Mal.","„Ich bin total genervt.""],a:1,e:"Sachinhalt = nur die Fakten: Dienst down, wiederholt. Alles andere sind andere Seiten."},
+    {t:"VS",q:"Gleiche Nachricht: Was ist die Selbstoffenbarung?",o:["„Behebe das sofort!"","„Ich bin frustriert / genervt und stehe unter Druck."","Der Dienst ist down."],a:1,e:"Selbstoffenbarung = was der Sender über sich selbst preisgibt: Frust, Stress, Sorge."},
+    {t:"VS",q:"Gleiche Nachricht: Was ist die Beziehungsseite?",o:["„Ich traue dir das nicht zu / du arbeitest nicht sauber."","„Der Dienst ist nicht erreichbar."","„Ich habe Angst vor Konsequenzen.""],a:0,e:"„Schon wieder" transportiert: „Du machst deine Arbeit nicht richtig." Das ist die Beziehungsbotschaft."},
+    {t:"VS",q:"Gleiche Nachricht: Was ist der Appell?",o:["„Ich bin genervt."","„Kümmere dich sofort darum und sorg dafür, dass es nicht wieder passiert."","„Du bist unfähig.""],a:1,e:"Appell = was der Sender erreichen will: sofortige Behebung, künftig sauberer arbeiten."},
+    {t:"VS",q:"Kollege antwortet: „Wenn du meinst, dass du es besser kannst, mach es doch selbst." Auf welchem Ohr hat er gehört?",o:["Sachohr","Appellohr","Beziehungsohr"],a:2,e:"Er reagiert nicht auf den Sachinhalt (Dienst down), sondern verteidigt sich gegen empfundene Abwertung seiner Kompetenz."},
+    {t:"VS",q:"Welche Antwort bleibt auf der Sachebene und hilft bei der Lösung?",o:["„Immer bin ich schuld, oder?"","„Ich schau sofort nach. Seit wann ist er nicht erreichbar, gibt es eine Fehlermeldung? Ich melde mich in 10 Minuten mit dem Stand."","„Dann mach du es doch beim nächsten Mal.""],a:1,e:"Sachlich = zurück zu Fakten, Rückfrage, konkrete Zusage mit Zeitangabe."},
+    {t:"VS",q:"Ist die Beziehungsebene in „Der Dienst ist schon wieder nicht erreichbar." enthalten, oder entsteht sie erst beim Empfänger?",o:["Nur beim Empfänger, der Sender hat rein sachlich gesprochen","Beides: „schon wieder" liefert einen Anhaltspunkt vom Sender, aber die konkrete Deutung („du bist unfähig") entsteht beim Empfänger","Nur beim Sender, der Empfänger hat keinen Einfluss"],a:1,e:"Vier Schnäbel senden immer alle vier Seiten mit. Aber welche Seite wie stark gehört wird, entscheidet der Empfänger (vier Ohren)."},
+    {t:"VS",q:"Wozu hilft das Vier-Seiten-Modell im IT-Alltag am meisten?",o:["Um zu verstehen, warum sachliche Aussagen als Angriff ankommen, und bewusst auf die Sachebene zurückzuführen","Um Tickets schneller zu schließen","Um zu entscheiden, wer zuständig ist"],a:0,e:"Es erklärt Missverständnisse. Grenze: Es löst nicht das technische Problem und sagt nicht, wer zuständig ist."},
+
+    // ---- Ich-Botschaft
+    {t:"IB",q:"Richtiger Aufbau einer Ich-Botschaft?",o:["Vorwurf → Entschuldigung → Forderung","Wahrnehmung → eigenes Gefühl/Problem mit Begründung → Wunsch/Lösung","Gefühl → Drohung → Kompromiss"],a:1,e:"1. Konkrete Wahrnehmung ohne Wertung, 2. Was das bei mir auslöst und warum, 3. Was ich mir wünsche."},
+    {t:"IB",q:"„Ich finde, du solltest endlich aufhören, ständig ohne Absprache am Produktivsystem herumzufummeln." Ist das eine gelungene Ich-Botschaft?",o:["Ja, sie beginnt mit „Ich"","Nein: ein Du-Vorwurf mit „Ich finde" davor. Verallgemeinerungen („ständig", „endlich"), abwertend („herumfummeln"), keine Wahrnehmung, kein Gefühl, kein Wunsch","Ja, weil das Problem klar benannt wird"],a:1,e:"Test: Steckt hinter dem „Ich" ein Du-Vorwurf? Fehlen Wahrnehmung, Begründung und Wunsch? Dann ist es nur verkleidet."},
+    {t:"IB",q:"Welche Umformulierung von „Du dokumentierst deine Änderungen nie ordentlich." ist die beste Ich-Botschaft?",o:["„Ich finde, du dokumentierst nie ordentlich."","„Mir ist aufgefallen, dass bei den letzten drei Firewall-Änderungen kein Eintrag im Change-Log steht. Das macht es mir schwer, Fehler nachzuvollziehen, und ich habe Sorge, dass wir bei einem Ausfall Zeit verlieren. Ich möchte, dass wir Änderungen ab jetzt direkt im Ticket dokumentieren."","„Kannst du bitte mal dokumentieren?""],a:1,e:"Konkrete Wahrnehmung (3 Änderungen, kein Eintrag) + Problem mit Begründung + klarer Wunsch. Deutlich, aber kein Angriff."},
+    {t:"IB",q:"Welche Wörter sind Warnsignale für einen verkleideten Vorwurf?",o:["„immer", „nie", „ständig", „endlich", „schon wieder"","„bitte", „danke", „gerne"","„Server", „Ticket", „Update""],a:0,e:"Verallgemeinerungen greifen die Person an. Eine Ich-Botschaft nennt einen konkreten Vorfall."},
+    {t:"IB",q:"Warum reagieren Menschen auf Du-Botschaften meist defensiv oder genervt?",o:["Weil sie sich angegriffen fühlen und sich verteidigen statt zuzuhören","Weil Du-Botschaften zu höflich sind","Weil sie zu lang sind"],a:0,e:"Angriff → Verteidigung → Gegenangriff (Axiom 3!). Die Ich-Botschaft steigt aus dieser Spirale aus."},
+    {t:"IB",q:"Wie muss eine gute Ich-Botschaft klingen?",o:["Künstlich freundlich und weichgespült","Klar und deutlich, aber ohne persönlichen Angriff","Möglichst emotional, damit der andere Mitleid hat"],a:1,e:"Aus dem Übungsblatt: „Eine gute Ich-Botschaft darf deutlich sein, sie soll nicht künstlich freundlich klingen.""},
+    {t:"IB",q:"„Die User sind einfach zu blöd, vernünftige Fehlermeldungen zu schreiben." Beste Umformulierung?",o:["„Ich finde die User zu blöd."","„Mir fällt auf, dass in vielen Tickets Fehlermeldung und betroffenes System fehlen. Dadurch muss ich oft nachfragen und die Bearbeitung dauert länger. Ich schlage vor, dass wir eine kurze Ticket-Vorlage mit Pflichtfeldern einführen."","„Die User müssen endlich lernen, Tickets zu schreiben.""],a:1,e:"Wahrnehmung (was fehlt) + Auswirkung (Nachfragen, Dauer) + Lösung (Vorlage). Keine Abwertung."},
+
+    // ---- Transfer-Fall
+    {t:"TR",q:"Freitag 15:45: „Kann sich bitte endlich jemand darum kümmern?" Was ist aus Sicht des Sender-Empfänger-Modells das Problem?",o:["Die Nachricht ist zu lang","Unvollständig: kein konkreter Dienst, keine Zuständigkeit („jemand"), keine Frist. Empfänger ergänzen Annahmen („der andere ist zuständig")","Sie wurde im falschen Chat gepostet"],a:1,e:"Folge: A denkt, B ist zuständig, niemand handelt. Fehlende Info wird durch Annahmen ersetzt."},
+    {t:"TR",q:"Warum antwortet B mit „Ich habe heute schon genug Probleme von anderen Leuten gelöst."?",o:["Er hat das „endlich" auf dem Beziehungsohr gehört (Vorwurf: ihr seid zu langsam) und verteidigt sich","Er hat den Sachinhalt nicht verstanden","Er möchte Überstunden abbauen"],a:0,e:"Vier Seiten / Axiom 2: „endlich" = Vorwurf. B reagiert auf die Beziehungsebene statt auf die Sache."},
+    {t:"TR",q:"„Genau diese Einstellung meine ich." Welches Axiom beschreibt, was hier passiert?",o:["Axiom 5, symmetrisch/komplementär","Axiom 3, Ursache und Wirkung: Vorwurf → Abwehr → Vorwurf, die Spirale eskaliert, der Dienst bleibt offline","Axiom 4, digital/analog"],a:1,e:"Jeder reagiert auf den anderen, keiner steigt aus. Ergebnis: Eskalation und liegen gebliebenes Sachproblem."},
+    {t:"TR",q:"Welche Nachricht der Teamleitung wäre deutlich besser?",o:["„Kann sich BITTE jemand darum kümmern?!!"","„@B: Dienst X ist seit 15:40 nicht erreichbar, Prio 1. Bitte übernimm du die Störung. @A: unterstütze bitte bei Bedarf. Bis 16:00 brauche ich hier eine kurze Rückmeldung zum Stand."","„Wer ist eigentlich zuständig hier?""],a:1,e:"Klärt Zuständigkeit (@B), Dringlichkeit (Prio 1), Sache (welcher Dienst, seit wann) und erwartete Rückmeldung (bis 16:00, wo)."},
+    {t:"TR",q:"Was ist eine typische Grenze der Kommunikationsmodelle im Fall?",o:["Sie erklären Missverständnisse, lösen aber nicht das technische Problem und klären nicht die tatsächliche Zuständigkeit","Sie funktionieren nur bei mündlicher Kommunikation","Sie gelten nicht in der IT"],a:0,e:"Immer eine Grenze nennen können: Modell macht sichtbar, warum es schiefläuft, aber es ersetzt keine klare Prozessregel oder Technik-Lösung."},
+    {t:"TR",q:"Kollege sagt „Wenn du mir nicht vertraust, kannst du meine Arbeit ja gleich selbst machen." Welche Seite der vorherigen Nachricht ist bei ihm angekommen?",o:["Sachinhalt (undokumentierte Änderung)","Beziehungsseite: er hört Misstrauen und Abwertung seiner Kompetenz","Appell (bitte dokumentieren)"],a:1,e:"„Wenn du mir nicht vertraust" zeigt: Beziehungsohr. Auf den Sachinhalt (Doku fehlt) geht er gar nicht ein."}
+  ];
+
+  // ---------- Exam tasks with model answers ----------
+  var EXAM=[
+    {id:"a1a",area:"I",t:"SE",pts:3,title:"Aufgabe 1a · Sender-Empfänger-Modell erklären",situ:"Erkläre das Modell in eigenen Worten und nenne, was es für berufliche Kommunikation leistet.",model:"<p><b>Erklärung:</b> Ein Sender verschlüsselt eine Nachricht und schickt sie über ein Medium (Chat, Telefon, Ticket) mit einem Protokoll (Sprache, Zeichensystem) an einen Empfänger, der sie entschlüsselt. Auf dem Weg können Störungen, unvollständige Informationen und eigene Annahmen des Empfängers entstehen.</p><p><b>Nutzen im Beruf:</b> Kommunikation ist erst gelungen, wenn der andere es richtig verstanden hat. Das Modell hilft, klar und vollständig zu formulieren, Missverständnisse zu erkennen und gezielt nachzufragen (z. B. bei Tickets und Arbeitsaufträgen).</p>"},
+    {id:"a1b",area:"I",t:"VS",pts:4,title:"Aufgabe 1b · Vier-Seiten-Modell erklären",situ:"Erkläre das Modell nach Schulz von Thun und seinen Nutzen im Beruf.",model:"<p><b>Erklärung:</b> Jede Nachricht hat vier Seiten gleichzeitig: <b>Sachinhalt</b> (worüber informiere ich), <b>Selbstoffenbarung</b> (was zeige ich von mir: Gefühl, Stress), <b>Beziehung</b> (was halte ich von dir, wie stehen wir zueinander) und <b>Appell</b> (was will ich erreichen). Der Sender spricht mit vier Schnäbeln, der Empfänger hört mit vier Ohren. Missverständnisse entstehen, wenn eine andere Seite gehört wird als gemeint.</p><p><b>Nutzen:</b> Erklärt, warum sachliche Aussagen als Angriff ankommen und Gespräche eskalieren. Hilft, bewusst auf die Sachebene zurückzuführen und eigene Aussagen so zu formulieren, dass die gewünschte Seite ankommt.</p>"},
+    {id:"a1c",area:"I",t:"IB",pts:3,title:"Aufgabe 1c · Ich-Botschaft: Aufbau und Zweck",situ:"Erkläre Aufbau und Zweck der Ich-Botschaft.",model:"<p><b>Aufbau:</b> 1. konkrete Wahrnehmung ohne Wertung („Mir ist aufgefallen, dass …"), 2. eigenes Gefühl oder Problem mit Begründung („Das ist für mich ein Problem, weil …"), 3. Wunsch oder Lösung („Ich möchte, dass …").</p><p><b>Zweck:</b> Ein Problem klar und deutlich ansprechen, ohne den anderen anzugreifen. Das Gegenüber geht nicht in die Verteidigung, das Gespräch bleibt sachlich und lösbar. Wichtig: Sie darf deutlich sein und soll nicht künstlich freundlich klingen.</p>"},
+    {id:"a2",area:"I",t:"AX",pts:10,title:"Aufgabe 2 · Die fünf Axiome nennen und erläutern",situ:"Nenne die fünf Axiome nach Watzlawick und erläutere jedes knapp. (je 2 P)",model:"<ol><li><b>Man kann nicht nicht kommunizieren.</b> Auch Schweigen, Wegschauen, Kamera aus oder Nicht-Antworten ist eine Botschaft.</li><li><b>Jede Kommunikation hat einen Inhalts- und einen Beziehungsaspekt.</b> Neben der Sachinformation wird immer mitgeteilt, wie man zum anderen steht. Die Beziehung bestimmt, wie der Inhalt verstanden wird.</li><li><b>Kommunikation ist immer Ursache und Wirkung (Interpunktion).</b> Jeder sieht sein Verhalten als Reaktion auf den anderen. Dadurch entstehen Teufelskreise und Eskalationen.</li><li><b>Kommunikation ist digital und analog.</b> Digital = Worte, analog = Tonfall, Mimik, Gestik, Emojis. Widersprechen sie sich, wird dem Analogen geglaubt.</li><li><b>Kommunikation ist symmetrisch oder komplementär.</b> Symmetrisch = gleiche Ebene (Kollegen), komplementär = unterschiedliche Rollen (Chef ↔ Azubi).</li></ol>"},
+    {id:"a3a",area:"II",t:"VS",pts:8,title:"Aufgabe 3a · Vier Seiten von „Der Dienst ist schon wieder nicht erreichbar."",situ:"Nach einem fehlgeschlagenen Deployment schreibt ein Admin: „Der Dienst ist schon wieder nicht erreichbar." Formuliere für jede Seite eine plausible Botschaft.",model:"<ul><li><b>Sachinhalt:</b> Der Dienst ist nach dem Deployment nicht erreichbar. Das ist nicht das erste Mal.</li><li><b>Selbstoffenbarung:</b> Ich bin genervt und frustriert, stehe unter Druck und mache mir Sorgen wegen der Auswirkungen.</li><li><b>Beziehung:</b> „Ich traue dir das nicht (mehr) zu. Du arbeitest nicht sauber." (verstärkt durch „schon wieder")</li><li><b>Appell:</b> „Kümmere dich sofort darum und sorg dafür, dass es nicht noch einmal passiert."</li></ul>"},
+    {id:"a3b",area:"II",t:"VS",pts:3,title:"Aufgabe 3b · Auf welchem Ohr hat der Kollege gehört?",situ:"Der Kollege antwortet: „Wenn du meinst, dass du es besser kannst, mach es doch selbst." Begründe anhand der Antwort.",model:"<p><b>Beziehungsohr.</b> Seine Antwort geht nicht auf den Sachinhalt (Dienst ist down) ein, sondern er verteidigt sich gegen die empfundene Abwertung seiner Kompetenz („du kannst es besser"). Das „schon wieder" hat er als Vorwurf „du machst deine Arbeit schlecht" gehört.</p>"},
+    {id:"a3c",area:"II",t:"VS",pts:2,title:"Aufgabe 3c · Sachliche Antwort formulieren",situ:"Formuliere eine Antwort, die auf der Sachebene bleibt und zur Problemlösung beiträgt.",model:"<p>„Ich schaue mir das sofort an. Seit wann ist der Dienst nicht erreichbar, und gibt es eine Fehlermeldung? Ich melde mich in 10 Minuten hier im Chat mit dem Stand."</p><p class='tip'>Muster: Zusage + Rückfrage nach Fakten + konkreter Zeitpunkt für Rückmeldung.</p>"},
+    {id:"a4",area:"II",t:"AX",pts:13,title:"Aufgabe 4 · Axiome zu IT-Fällen zuordnen",situ:"Fall A: Kamera aus, keine Antwort, dann „Von mir aus." · Fall B: A kontrolliert B, B wird unsicher und macht mehr Fehler, A fühlt sich bestätigt. · Fall C: Admins auf Augenhöhe, danach Anweisung an Azubi. · Fall D: „Interessante Lösung." + Augenrollen-Emoji, Mitarbeiter fühlt sich abgewertet.",model:"<ul><li><b>Fall A → Axiom 1 (Man kann nicht nicht kommunizieren):</b> Kamera aus, Schweigen und das knappe „Von mir aus" senden trotzdem eine Botschaft: Desinteresse, Widerwille, Ablehnung.</li><li><b>Fall B → Axiom 3 (Ursache und Wirkung / Interpunktion):</b> A kontrolliert, weil B Fehler macht. B macht Fehler, weil A kontrolliert. Jeder sieht sich als Reagierender, es entsteht ein Teufelskreis, der sich selbst bestätigt.</li><li><b>Fall C → Axiom 5 (symmetrisch / komplementär):</b> Unter erfahrenen Kollegen läuft die Diskussion symmetrisch auf Augenhöhe. Gegenüber dem Azubi wechselt dieselbe Person in eine komplementäre Rolle mit verbindlicher Anweisung.</li><li><b>Fall D → Axiom 4 (digital / analog):</b> Die Worte („Interessante Lösung") sind neutral bis positiv, das Emoji (analog) ist abwertend. Bei Widerspruch gewinnt das Analoge, deshalb kommt Abwertung an. <i>Alternativ vertretbar: Axiom 2</i>, weil eine sachliche Aussage mit einer abwertenden Beziehungsbotschaft verbunden wird. Axiom 4 passt stärker, weil der Widerspruch zwischen Wort und Emoji der eigentliche Mechanismus ist.</li></ul>"},
+    {id:"a5a",area:"III",t:"TR",pts:6,title:"Aufgabe 5a · Freitag 15:45: Zwei Kommunikationsprobleme mit zwei Modellen",situ:"Teamleitung: „Kann sich bitte endlich jemand darum kümmern?" A denkt, B ist zuständig. B: „Ich habe heute schon genug Probleme von anderen Leuten gelöst." Teamleitung: „Genau diese Einstellung meine ich." Dienst bleibt offline.",model:"<p><b>Problem 1 (Sender-Empfänger-Modell):</b> Die Nachricht ist unvollständig: „jemand" statt einer klaren Zuständigkeit, kein konkreter Dienst, keine Frist. Empfänger A ergänzt die Annahme „B ist zuständig", also handelt niemand. Das Modell macht sichtbar, dass fehlende Informationen durch Annahmen ersetzt werden und die Nachricht damit nicht so ankommt, wie sie gemeint war.</p><p><b>Problem 2 (Vier-Seiten-Modell / Axiom 2 und 3):</b> Das „endlich" transportiert eine Beziehungsbotschaft (Vorwurf: „ihr seid zu langsam, unzuverlässig"). B hört auf dem Beziehungsohr und verteidigt sich, statt das Sachproblem anzugehen. Die Teamleitung antwortet mit einem weiteren Vorwurf, es entsteht eine Eskalationsspirale (Axiom 3: Vorwurf → Abwehr → Vorwurf). Das Modell macht sichtbar, warum eine „dringende" Nachricht Streit statt Handlung auslöst.</p>"},
+    {id:"a5b",area:"III",t:"TR",pts:2,title:"Aufgabe 5b · Was ist an der ursprünglichen Nachricht problematisch?",situ:"Beurteile die Nachricht der Teamleitung, obwohl die Dringlichkeit nachvollziehbar ist.",model:"<p>Keine konkrete Zuständigkeit („jemand"), kein konkreter Dienst, keine Frist und kein Kanal für die Rückmeldung. Das „endlich" ist ein Vorwurf an alle und verlagert die Nachricht auf die Beziehungsebene. Die Dringlichkeit wird als Ärger statt als klare Priorität kommuniziert.</p>"},
+    {id:"a5c",area:"III",t:"TR",pts:2,title:"Aufgabe 5c · Bessere Nachricht der Teamleitung",situ:"Formuliere eine Nachricht, die Zuständigkeit, Dringlichkeit und erwartete Rückmeldung klärt.",model:"<p>„@B: Der Dienst X ist seit 15:40 nicht erreichbar, Prio 1. Bitte übernimm du die Störungsanalyse. @A: Bitte unterstütze bei Bedarf. Bis 16:00 brauche ich hier im Chat eine kurze Rückmeldung zum Stand und zur voraussichtlichen Dauer."</p><p class='tip'>Checkliste: Wer (@) · Was (welcher Dienst) · Seit wann · Priorität · Bis wann Rückmeldung · Wo.</p>"},
+    {id:"a5d",area:"III",t:"TR",pts:2,title:"Aufgabe 5d · Welches Modell erklärt den Fall besser? Grenze nennen",situ:"Begründe deine Entscheidung und nenne eine Grenze des Modells.",model:"<p><b>Beispielantwort:</b> Das Vier-Seiten-Modell erklärt den Fall besser, weil es zeigt, warum die Nachricht Abwehr statt Handlung auslöst (Beziehungsebene durch „endlich") und wie die Eskalation entsteht. <b>Grenze:</b> Es löst nicht das eigentliche Problem der fehlenden Zuständigkeit und sagt nichts darüber, wer den Dienst wieder hochfahren soll. Außerdem ist die Beziehungsebene immer auch Interpretation des Empfängers.</p><p class='tip'>Genauso vertretbar: Sender-Empfänger erklärt besser, warum niemand handelt (fehlende Info). Grenze: Es erklärt nicht, warum B emotional reagiert.</p>"},
+    {id:"a6a",area:"III",t:"IB",pts:3,title:"Aufgabe 6a · Echte Ich-Botschaft oder verkleideter Angriff?",situ:"„Ich finde, du solltest endlich aufhören, ständig ohne Absprache am Produktivsystem herumzufummeln." Ist das eine gelungene Ich-Botschaft?",model:"<p><b>Nein.</b> „Ich finde" ist nur Verpackung, dahinter steckt ein Du-Vorwurf. Verallgemeinerungen („ständig", „endlich") und ein abwertendes Wort („herumfummeln") greifen die Person an. Es fehlen alle drei Bausteine: keine konkrete Wahrnehmung, kein eigenes Gefühl oder Problem mit Begründung, kein konkreter Wunsch. Der Kollege fühlt sich angegriffen und geht in die Verteidigung.</p>"},
+    {id:"a6b",area:"III",t:"IB",pts:4,title:"Aufgabe 6b · Echte Ich-Botschaft formulieren",situ:"Aufbau: Wahrnehmung → eigenes Problem/Gefühl mit Begründung → Wunsch/Lösung. Darf deutlich sein.",model:"<p>„Mir ist aufgefallen, dass gestern die Konfiguration am Produktivsystem geändert wurde, ohne dass es im Ticket stand oder ich informiert war. <b>[Wahrnehmung]</b> Das ist für mich ein echtes Problem, weil ich bei einer Störung nicht nachvollziehen kann, was geändert wurde, und wir dadurch Zeit verlieren. <b>[Problem + Begründung]</b> Ich möchte, dass wir Änderungen am Produktivsystem vorher kurz absprechen und direkt im Change-Log dokumentieren." <b>[Wunsch]</b></p>"},
+    {id:"a6c",area:"III",t:"VS",pts:2,title:"Aufgabe 6c · Antwort des Kollegen mit Vier Seiten analysieren",situ:"„Wenn du mir nicht vertraust, kannst du meine Arbeit ja gleich selbst machen." Welche Seite ist bei ihm angekommen?",model:"<p><b>Beziehungsseite.</b> „Wenn du mir nicht vertraust" zeigt: Er hat Misstrauen und Abwertung seiner Kompetenz gehört. Auf den Sachinhalt (undokumentierte Änderung) geht er gar nicht ein, er reagiert nur auf die vermutete Beziehungsbotschaft „du bist unfähig".</p>"},
+    {id:"a6d",area:"III",t:"IB",pts:3,title:"Aufgabe 6d · Gesprächsverlauf mit Vereinbarung",situ:"Entwickle 3–4 Äußerungen, mit denen beide die Situation sachlich klären und eine Vereinbarung treffen.",model:"<ol><li><b>A:</b> „Mir geht es nicht um dein Können. Ich muss bei einem Ausfall nachvollziehen können, was geändert wurde."</li><li><b>B:</b> „Okay, das verstehe ich. Ich hatte es eilig und wollte es nachträglich eintragen."</li><li><b>A:</b> „Können wir vereinbaren: Änderungen am Prod-System vorher kurz im Chat ankündigen und direkt im Change-Log eintragen?"</li><li><b>B:</b> „Ja, passt. Wenn es eilig ist, schreibe ich wenigstens eine Zeile ins Ticket, bevor ich anfange."</li></ol><p class='tip'>Muster: Missverständnis klären → Verständnis zeigen → konkrete Regel vorschlagen → Zustimmung mit Ausnahme-Regel.</p>"},
+    {id:"ub1",area:"Bonus",t:"SE",pts:0,title:"Bonus · Übungsblatt: Sender-Empfänger-Situationen A, B, C",situ:"A: „Webserver macht Probleme, starte ihn neu" → ganze VM neu gestartet. B: „VPN geht nicht" → Passwort zurückgesetzt. C: „Updates heute noch einspielen" → sofort auf Prod statt Wartungsfenster 22 Uhr.",model:"<p><b>A:</b> Gesendet: „Webserver neu starten". Ergänzte Annahme: gemeint ist die ganze VM. Folge: mehrere Dienste unterbrochen. Besser: „Bitte nur den Webdienst (z. B. nginx) auf SRV-WEB01 neu starten, nicht die VM." Rückfrage: „Meinst du den Dienst oder die VM?"</p><p><b>B:</b> Gesendet: „VPN geht nicht". Annahme: Login-Problem. Folge: unnötiger Passwort-Reset, Zeitverlust, Nutzer weiter blockiert. Rückfrage: „Kannst du dich mit dem VPN verbinden? Welche Anwendung erreichst du nicht? Welche Fehlermeldung?"</p><p><b>C:</b> Gesendet: „heute noch". Annahme: sofort. Folge: Produktivbetrieb tagsüber gestört. Besser: „Bitte die Updates heute im Wartungsfenster ab 22 Uhr einspielen, nicht vorher."</p><p><b>3 Pflichtinfos im Ticket:</b> Was genau (Symptom, Fehlermeldung, System) · Seit wann / was wurde geändert oder versucht · Wer ist betroffen, wie dringend, Kontakt.</p>"},
+    {id:"ub4",area:"Bonus",t:"IB",pts:0,title:"Bonus · Übungsblatt: 5 Ich-Botschaften",situ:"Formuliere die Vorwürfe um: 1. „Du dokumentierst nie ordentlich." 2. „Du schiebst mir ständig Tickets rüber." 3. „Schon wieder ohne Absprache am Prod-System." 4. „Die User sind zu blöd für Fehlermeldungen." 5. „Wenn du meine Nachrichten lesen würdest…"",model:"<ol><li>„Mir ist aufgefallen, dass bei den letzten drei Änderungen kein Eintrag im Change-Log steht. Das macht es mir schwer, Fehler nachzuvollziehen, und ich habe Sorge, dass wir bei einem Ausfall Zeit verlieren. Ich möchte, dass Änderungen ab jetzt direkt im Ticket dokumentiert werden."</li><li>„Diese Woche wurden mir vier Tickets ohne Absprache zugewiesen, die vorher bei dir lagen. Dadurch komme ich mit meinen eigenen Aufgaben nicht hinterher und fühle mich übergangen. Ich möchte, dass wir Ticket-Übergaben vorher kurz absprechen."</li><li>„Gestern wurde die Firewall-Regel am Prod-System geändert, ohne dass ich informiert war. Das ist für mich ein Problem, weil ich bei einer Störung nicht weiß, was sich geändert hat. Ich wünsche mir, dass wir Prod-Änderungen vorher kurz im Chat ankündigen."</li><li>„Mir fällt auf, dass in vielen Tickets Fehlermeldung und betroffenes System fehlen. Dadurch muss ich oft nachfragen und die Bearbeitung dauert länger. Ich schlage vor, dass wir eine Ticket-Vorlage mit Pflichtfeldern einführen."</li><li>„Ich habe gestern zwei Nachrichten zum Wartungsfenster geschrieben, auf die keine Reaktion kam. Dadurch wurde das Update zur falschen Zeit eingespielt, das ärgert mich. Ich möchte, dass wir wichtige Infos kurz mit einem Daumen bestätigen, damit ich weiß, dass sie angekommen sind."</li></ol>"}
+  ];
+
+  // ---------- state ----------
+  var state={quiz:{},rate:{}};
+  try{var s=localStorage.getItem("komm-crash-v1");if(s){state=JSON.parse(s);state.quiz=state.quiz||{};state.rate=state.rate||{};}}catch(e){}
+  function save(){try{localStorage.setItem("komm-crash-v1",JSON.stringify(state));}catch(e){}}
+
+  // ---------- tabs ----------
+  var tabs=document.querySelectorAll("nav.tabs button");
+  function showTab(name){
+    tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.tab===name?"true":"false");});
+    ["spick","quiz","exam","eval"].forEach(function(n){document.getElementById("panel-"+n).hidden=(n!==name);});
+    if(name==="eval")renderEval();
+    window.scrollTo({top:0});
+    try{localStorage.setItem("komm-crash-tab",name);}catch(e){}
+  }
+  tabs.forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.tab);});});
+  document.getElementById("go-quiz").addEventListener("click",function(){showTab("quiz");});
+
+  // ---------- cover / recall ----------
+  document.querySelectorAll(".cover-toggle").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var c=document.getElementById(btn.dataset.cover);
+      var h=c.classList.toggle("hidden-content");
+      btn.innerHTML=h?icon("eye")+"Aufdecken":icon("eye-slash")+"Abdecken &amp; selbst aufsagen";
+    });
+  });
+
+  // ---------- axiom cards ----------
+  document.querySelectorAll(".ax").forEach(function(b){b.addEventListener("click",function(){b.classList.toggle("open");});});
+
+  // ---------- countdown ----------
+  var start=Date.now(), total=30*60;
+  function tick(){
+    var left=total-Math.floor((Date.now()-start)/1000);
+    var el=document.getElementById("clockv");
+    if(left<=0){el.textContent="Zeit! Viel Erfolg";return;}
+    var m=Math.floor(left/60),s=left%60;
+    el.textContent=(m<10?"0":"")+m+":"+(s<10?"0":"")+s;
+    setTimeout(tick,1000);
+  }
+  tick();
+
+  // ---------- quiz ----------
+  var run=null;
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function topicStats(){
+    var st={};
+    Object.keys(TOPICS).forEach(function(t){st[t]={c:0,n:0};});
+    Q.forEach(function(q,i){var r=state.quiz[i];if(r!==undefined){st[q.t].n++;if(r)st[q.t].c++;}});
+    return st;
+  }
+  function weakSet(){
+    var st=topicStats();var idx=[];
+    Q.forEach(function(q,i){
+      var r=state.quiz[i];var s=st[q.t];
+      var topicWeak=s.n>0&&(s.c/s.n)<0.75;
+      var rateWeak=false;
+      EXAM.forEach(function(e){if(e.t===q.t&&state.rate[e.id]!==undefined&&state.rate[e.id]<2)rateWeak=true;});
+      if(r===undefined||r===false||topicWeak||rateWeak)idx.push(i);
+    });
+    return idx;
+  }
+  function startQuiz(indices,label){
+    if(!indices.length){document.getElementById("q-tip").textContent="Keine Fragen in dieser Auswahl. Spiel erst „Alle Fragen".";return;}
+    run={list:shuffle(indices.slice()),pos:0,correct:0,label:label,answered:false};
+    document.getElementById("quiz-start").hidden=true;
+    document.getElementById("quiz-done").hidden=true;
+    document.getElementById("quiz-run").hidden=false;
+    renderQ();
+  }
+  function renderQ(){
+    var qi=run.list[run.pos],q=Q[qi];
+    run.answered=false;
+    var tp=document.getElementById("q-topic");tp.textContent=TOPICS[q.t];tp.className="pill "+q.t;
+    document.getElementById("q-count").textContent=(run.pos+1)+" / "+run.list.length;
+    document.getElementById("q-prog").style.width=(run.pos/run.list.length*100)+"%";
+    document.getElementById("q-text").textContent=q.q;
+    var opts=document.getElementById("q-opts");opts.innerHTML="";
+    var order=shuffle(q.o.map(function(_,i){return i;}));
+    order.forEach(function(oi,k){
+      var b=document.createElement("button");b.className="opt";b.type="button";
+      b.innerHTML='<span class="k">'+String.fromCharCode(65+k)+'</span><span></span>';
+      b.lastChild.textContent=q.o[oi];
+      b.addEventListener("click",function(){answer(qi,oi,b);});
+      opts.appendChild(b);
+    });
+    var fb=document.getElementById("q-fb");fb.hidden=true;fb.className="feedback";
+    var nx=document.getElementById("q-next");nx.disabled=true;
+    nx.innerHTML=(run.pos===run.list.length-1)?"Ergebnis anzeigen"+icon("flag"):"Weiter"+icon("arrow-right");
+  }
+  function answer(qi,oi,btn){
+    if(run.answered)return;run.answered=true;
+    var q=Q[qi],ok=(oi===q.a);
+    state.quiz[qi]=ok;save();
+    if(ok)run.correct++;
+    document.querySelectorAll("#q-opts .opt").forEach(function(b){
+      b.disabled=true;
+      if(b.lastChild.textContent===q.o[q.a])b.classList.add("correct");
+    });
+    if(!ok)btn.classList.add("wrong");
+    var fb=document.getElementById("q-fb");
+    fb.className="feedback "+(ok?"ok":"no");
+    var head=document.createElement("b");
+    head.innerHTML=ok?icon("check-circle-fill")+"<span>Richtig</span>":icon("x-circle-fill")+"<span></span>";
+    if(!ok)head.lastChild.textContent="Leider nicht. Richtig wäre: „"+q.o[q.a]+"“";
+    fb.innerHTML="";fb.appendChild(head);fb.appendChild(document.createTextNode(q.e));
+    fb.hidden=false;
+    document.getElementById("q-next").disabled=false;
+    document.getElementById("q-next").focus();
+  }
+  document.getElementById("q-next").addEventListener("click",function(){
+    if(run.pos<run.list.length-1){run.pos++;renderQ();}else finishQuiz();
+  });
+  document.getElementById("q-quit").addEventListener("click",function(){
+    document.getElementById("quiz-run").hidden=true;document.getElementById("quiz-start").hidden=false;
+  });
+  function levelClass(p){return p>=75?"good":p>=50?"warn":"bad";}
+  function finishQuiz(){
+    document.getElementById("quiz-run").hidden=true;
+    document.getElementById("quiz-done").hidden=false;
+    document.getElementById("q-score").textContent=run.correct+" / "+run.list.length;
+    var p=Math.round(run.correct/run.list.length*100);
+    var v=p>=85?"Stark. Du bist deutlich besser vorbereitet, als du denkst. Jetzt die Musterlösungen der Probeklausur lesen.":p>=65?"Solide Basis. Schau dir die roten und gelben Themen nochmal im Spickzettel an, dann Schwachpunkte wiederholen.":"Noch wackelig, aber machbar: Zurück zum Spickzettel, die 5 Axiome und die 4 Seiten laut aufsagen, dann Schwachpunkte wiederholen.";
+    document.getElementById("q-verdict").textContent=v;
+    renderBars(document.getElementById("q-bars"),true);
+  }
+  function renderBars(el,quizOnly){
+    var st=topicStats();el.innerHTML="";
+    Object.keys(TOPICS).forEach(function(t){
+      var s=st[t];var n=s.n,c=s.c;
+      if(!quizOnly){EXAM.forEach(function(e){if(e.t===t&&e.pts>0&&state.rate[e.id]!==undefined){n+=2;c+=state.rate[e.id];}});}
+      var p=n?Math.round(c/n*100):null;
+      var d=document.createElement("div");d.className="bar";
+      d.innerHTML='<div class="lbl"></div><div class="track"><div class="'+(p===null?"lvl-none":"lvl-"+levelClass(p))+'" style="width:'+(p===null?0:p)+'%"></div></div><div class="pct">'+(p===null?"–":p+" %")+'</div>';
+      d.firstChild.textContent=TOPICS[t];
+      el.appendChild(d);
+    });
+  }
+  document.getElementById("q-all").addEventListener("click",function(){startQuiz(Q.map(function(_,i){return i;}),"Alle");});
+  document.getElementById("q-weak").addEventListener("click",function(){startQuiz(weakSet(),"Schwachpunkte");});
+  ["ax","vs","ib","se","tr"].forEach(function(k){
+    document.getElementById("q-"+k).addEventListener("click",function(){
+      var T=k.toUpperCase();startQuiz(Q.map(function(q,i){return q.t===T?i:-1;}).filter(function(i){return i>=0;}),TOPICS[T]);
+    });
+  });
+  document.getElementById("q-again-weak").addEventListener("click",function(){startQuiz(weakSet(),"Schwachpunkte");});
+  document.getElementById("q-again-all").addEventListener("click",function(){startQuiz(Q.map(function(_,i){return i;}),"Alle");});
+  document.getElementById("q-to-exam").addEventListener("click",function(){showTab("exam");});
+
+  // ---------- exam ----------
+  var exList=document.getElementById("exam-list");
+  var lastArea=null;
+  EXAM.forEach(function(e){
+    if(e.area!==lastArea){
+      var h=document.createElement("div");h.className="eyebrow area";
+      h.textContent=e.area==="I"?"Anforderungsbereich I · Wissen wiedergeben (20 P)":e.area==="II"?"Anforderungsbereich II · Anwenden und analysieren (26 P)":e.area==="III"?"Anforderungsbereich III · Beurteilen und Lösungen entwickeln (24 P)":"Bonus · Aus dem Übungsblatt (gleiche Fälle, andere Fragen)";
+      exList.appendChild(h);lastArea=e.area;
+    }
+    var c=document.createElement("div");c.className="card task";
+    c.innerHTML='<div class="row" style="justify-content:space-between;align-items:flex-start;flex-wrap:nowrap"><h3></h3><span class="pts"></span></div><div class="row" style="margin-bottom:8px"><span class="pill"></span></div><div class="situ"></div><details><summary>'+icon("chevron-right")+'Musterlösung anzeigen</summary><div class="model"></div></details><div class="rate"><span>'+icon("hand-thumbs-up")+'Hätte ich gewusst?</span><button data-v="2">Sicher</button><button data-v="1">Halb</button><button data-v="0">Nein</button></div>';
+    c.querySelector("h3").textContent=e.title;
+    c.querySelector(".pts").textContent=e.pts?e.pts+" P":"";
+    var pl=c.querySelector(".pill");pl.textContent=TOPICS[e.t];pl.className="pill "+e.t;
+    c.querySelector(".situ").textContent=e.situ;
+    c.querySelector(".model").innerHTML=e.model;
+    var rate=c.querySelector(".rate");
+    if(!e.pts){rate.hidden=true;}
+    var btns=rate.querySelectorAll("button");
+    function paint(){btns.forEach(function(b){b.className=(state.rate[e.id]!==undefined&&String(state.rate[e.id])===b.dataset.v)?"sel-"+b.dataset.v:"";});}
+    btns.forEach(function(b){b.addEventListener("click",function(){state.rate[e.id]=parseInt(b.dataset.v,10);save();paint();});});
+    paint();
+    exList.appendChild(c);
+  });
+
+  // ---------- eval ----------
+  function renderEval(){
+    renderBars(document.getElementById("e-bars"),false);
+    var st=topicStats();var rows=[];
+    Object.keys(TOPICS).forEach(function(t){
+      var n=st[t].n,c=st[t].c;
+      EXAM.forEach(function(e){if(e.t===t&&e.pts>0&&state.rate[e.id]!==undefined){n+=2;c+=state.rate[e.id];}});
+      rows.push({t:t,p:n?c/n:null,n:n});
+    });
+    var done=rows.filter(function(r){return r.p!==null;});
+    var adv=document.getElementById("e-advice");
+    if(!done.length){adv.innerHTML='<div class="eyebrow">'+icon("bullseye")+'Empfehlung</div><p style="margin:0">Noch keine Daten. Spiel das Quiz einmal komplett durch, dann siehst du hier, was du zuerst wiederholen solltest.</p>';return;}
+    done.sort(function(a,b){return a.p-b.p;});
+    var tips={AX:"Lies im Spickzettel die 5 Axiome, deck sie ab und sag sie laut auf. Dann den Zuordnungs-Trick: Schweigen → 1, „unfähig behandelt" → 2, Teufelskreis → 3, Worte vs. Emoji → 4, Augenhöhe vs. Anweisung → 5.",VS:"Merke SSBA und übe an dem Satz „Der Dienst ist schon wieder nicht erreichbar" alle vier Seiten. Antwort „Mach's doch selbst" = Beziehungsohr.",IB:"Drei Schritte: Wahrnehmung → Problem mit Begründung → Wunsch. Warnwörter: immer, nie, ständig, endlich. „Ich finde, du…" ist KEINE Ich-Botschaft.",SE:"Analyse-Schema: Was wurde gesendet? Welche Annahme hat der Empfänger ergänzt? Folgen? Bessere Nachricht. Plus die 3 Pflichtinfos im Ticket.",TR:"Lies im Spickzettel den großen Fall (Freitag 15:45) und die Musterlösung zu Aufgabe 5. Immer zwei Modelle nutzen und eine Grenze nennen."};
+    var html='<div class="eyebrow">'+icon("bullseye")+'Empfehlung: In dieser Reihenfolge wiederholen</div><ol>';
+    done.forEach(function(r){
+      var p=Math.round(r.p*100);
+      html+='<li><b>'+TOPICS[r.t]+'</b> <span class="tag '+levelClass(p)+'">'+p+' %</span><br><span class="tip">'+tips[r.t]+'</span></li>';
+    });
+    html+='</ol>';
+    var notDone=rows.filter(function(r){return r.p===null;}).map(function(r){return TOPICS[r.t];});
+    if(notDone.length)html+='<p class="tip">Noch nicht geübt: '+notDone.join(", ")+'.</p>';
+    html+='<div class="row" style="margin-top:8px"><button class="btn rose small" id="e-go-weak">'+icon("bullseye")+'Schwachpunkte im Quiz üben</button></div>';
+    adv.innerHTML=html;
+    document.getElementById("e-go-weak").addEventListener("click",function(){showTab("quiz");startQuiz(weakSet(),"Schwachpunkte");});
+    var got=0,max=0,rated=0;
+    EXAM.forEach(function(e){if(e.pts>0){max+=e.pts;if(state.rate[e.id]!==undefined){rated+=e.pts;got+=e.pts*state.rate[e.id]/2;}}});
+    document.getElementById("e-points").textContent=rated?Math.round(got)+" / "+max+(rated<max?"  (bewertet: "+rated+" P)":""):"– / "+max;
+  }
+  document.getElementById("e-reset").addEventListener("click",function(){
+    if(!confirm("Quiz-Ergebnisse und Selbstbewertung löschen?"))return;
+    state={quiz:{},rate:{}};save();
+    document.querySelectorAll(".rate button").forEach(function(b){b.className="";});
+    renderEval();
+  });
+
+  // restore tab
+  var t0="spick";try{t0=localStorage.getItem("komm-crash-tab")||"spick";}catch(e){}
+  showTab(t0);
+})();
+</script>
+
+</body>
+</html>

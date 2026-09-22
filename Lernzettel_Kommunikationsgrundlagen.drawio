@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="kommunikationsgrundlagen" name="Lernzettel">
+    <mxGraphModel dx="1780" dy="1360" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1780" pageHeight="1360" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="root_sender" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#557EA9;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="thema" target="sender">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="890" y="160" />
+              <mxPoint x="230" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_sender_0" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#557EA9;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="sender" target="sender_0">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="42" y="300" />
+              <mxPoint x="42" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_sender_1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#557EA9;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="sender" target="sender_1">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="42" y="300" />
+              <mxPoint x="42" y="568" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_sender_2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#557EA9;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="sender" target="sender_2">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="42" y="300" />
+              <mxPoint x="42" y="756" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_sender_3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#557EA9;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="sender" target="sender_3">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="42" y="300" />
+              <mxPoint x="42" y="954" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="root_ebenen" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#8870B1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="thema" target="ebenen">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="890" y="160" />
+              <mxPoint x="670" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ebenen_0" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#8870B1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ebenen" target="ebenen_0">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="482" y="300" />
+              <mxPoint x="482" y="387" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ebenen_1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#8870B1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ebenen" target="ebenen_1">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="482" y="300" />
+              <mxPoint x="482" y="538" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ebenen_2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#8870B1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ebenen" target="ebenen_2">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="482" y="300" />
+              <mxPoint x="482" y="676" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ebenen_3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#8870B1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ebenen" target="ebenen_3">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="482" y="300" />
+              <mxPoint x="482" y="824" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ebenen_4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#8870B1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ebenen" target="ebenen_4">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="482" y="300" />
+              <mxPoint x="482" y="972" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ebenen_5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#8870B1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ebenen" target="ebenen_5">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="482" y="300" />
+              <mxPoint x="482" y="1125" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="root_axiome" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#5F9170;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="thema" target="axiome">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="890" y="160" />
+              <mxPoint x="1110" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_axiome_0" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#5F9170;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="axiome" target="axiome_0">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="922" y="300" />
+              <mxPoint x="922" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_axiome_1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#5F9170;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="axiome" target="axiome_1">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="922" y="300" />
+              <mxPoint x="922" y="568" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_axiome_2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#5F9170;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="axiome" target="axiome_2">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="922" y="300" />
+              <mxPoint x="922" y="766" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_axiome_3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#5F9170;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="axiome" target="axiome_3">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="922" y="300" />
+              <mxPoint x="922" y="974" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_axiome_4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#5F9170;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="axiome" target="axiome_4">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="922" y="300" />
+              <mxPoint x="922" y="1174" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="root_ich" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#BC8D49;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="thema" target="ich">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="890" y="160" />
+              <mxPoint x="1550" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ich_0" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#BC8D49;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ich" target="ich_0">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1362" y="300" />
+              <mxPoint x="1362" y="395" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ich_1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#BC8D49;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ich" target="ich_1">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1362" y="300" />
+              <mxPoint x="1362" y="588" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ich_2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#BC8D49;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ich" target="ich_2">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1362" y="300" />
+              <mxPoint x="1362" y="781" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ich_3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;strokeColor=#BC8D49;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ich" target="ich_3">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1362" y="300" />
+              <mxPoint x="1362" y="959" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="thema" value="&lt;b style=&quot;font-size:26px&quot;&gt;Kommunikationsgrundlagen&lt;/b&gt;&lt;br&gt;&lt;br&gt;Nachrichten klar verstehen und Streit vermeiden" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF0F5;strokeColor=#61778C;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="590" y="25" width="600" height="105" />
+        </mxCell>
+        <mxCell id="sender" value="&lt;b style=&quot;font-size:18px&quot;&gt;Sender und Empfänger&lt;/b&gt;&lt;br&gt;&lt;br&gt;Bei unklaren Aufträgen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDF5FF;strokeColor=#557EA9;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="190" width="400" height="95" />
+        </mxCell>
+        <mxCell id="sender_0" value="&lt;b style=&quot;font-size:18px&quot;&gt;So läuft es&lt;/b&gt;&lt;br&gt;&lt;br&gt;Der Sender schickt eine Nachricht. Der Empfänger versteht und deutet sie. Infos können fehlen oder falsch ankommen." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDF5FF;strokeColor=#557EA9;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="315" width="365" height="150" />
+        </mxCell>
+        <mxCell id="sender_1" value="&lt;b style=&quot;font-size:18px&quot;&gt;Medium und Protokoll&lt;/b&gt;&lt;br&gt;&lt;br&gt;Medium ist der Kommunikationsweg, etwa Telefon oder Chat. Protokoll meint hier das Zeichensystem, etwa die deutsche Sprache." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDF5FF;strokeColor=#557EA9;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="483" width="365" height="170" />
+        </mxCell>
+        <mxCell id="sender_2" value="&lt;b style=&quot;font-size:18px&quot;&gt;Beispiel aus der IT&lt;/b&gt;&lt;br&gt;&lt;br&gt;„Starte den Server neu.“ Gemeint ist nur der Webdienst, aber der Kollege startet die ganze Maschine. Besser genau nachfragen." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDF5FF;strokeColor=#557EA9;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="671" width="365" height="170" />
+        </mxCell>
+        <mxCell id="sender_3" value="&lt;b style=&quot;font-size:18px&quot;&gt;Für Tickets merken&lt;/b&gt;&lt;br&gt;&lt;br&gt;Welches System ist betroffen?&lt;br&gt;Was ist der genaue Fehler?&lt;br&gt;Seit wann tritt er auf?&lt;br&gt;Gesagt heißt nicht automatisch richtig verstanden." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDF5FF;strokeColor=#557EA9;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="859" width="365" height="190" />
+        </mxCell>
+        <mxCell id="ebenen" value="&lt;b style=&quot;font-size:18px&quot;&gt;Die vier Ebenen&lt;/b&gt;&lt;br&gt;&lt;br&gt;Wenn etwas persönlich ankommt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2EFFF;strokeColor=#8870B1;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="470" y="190" width="400" height="95" />
+        </mxCell>
+        <mxCell id="ebenen_0" value="&lt;b style=&quot;font-size:18px&quot;&gt;Ein Satz mit vier Seiten&lt;/b&gt;&lt;br&gt;&lt;br&gt;„Der Dienst ist schon wieder nicht erreichbar.“&lt;br&gt;Modell nach Schulz von Thun." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2EFFF;strokeColor=#8870B1;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="505" y="315" width="365" height="145" />
+        </mxCell>
+        <mxCell id="ebenen_1" value="&lt;b style=&quot;font-size:18px&quot;&gt;Sachebene&lt;/b&gt;&lt;br&gt;&lt;br&gt;Was ist passiert?&lt;br&gt;Der Dienst ist ausgefallen." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2EFFF;strokeColor=#8870B1;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="505" y="478" width="365" height="120" />
+        </mxCell>
+        <mxCell id="ebenen_2" value="&lt;b style=&quot;font-size:18px&quot;&gt;Selbstoffenbarung&lt;/b&gt;&lt;br&gt;&lt;br&gt;Was zeigt die Person über sich?&lt;br&gt;Sie ist vermutlich genervt." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2EFFF;strokeColor=#8870B1;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="505" y="616" width="365" height="120" />
+        </mxCell>
+        <mxCell id="ebenen_3" value="&lt;b style=&quot;font-size:18px&quot;&gt;Beziehungsebene&lt;/b&gt;&lt;br&gt;&lt;br&gt;Wie steht sie zu mir?&lt;br&gt;Es kann wie „Du arbeitest schlecht“ ankommen." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2EFFF;strokeColor=#8870B1;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="505" y="754" width="365" height="140" />
+        </mxCell>
+        <mxCell id="ebenen_4" value="&lt;b style=&quot;font-size:18px&quot;&gt;Appell&lt;/b&gt;&lt;br&gt;&lt;br&gt;Was soll ich tun?&lt;br&gt;Den Dienst wieder zum Laufen bringen." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2EFFF;strokeColor=#8870B1;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="505" y="912" width="365" height="120" />
+        </mxCell>
+        <mxCell id="ebenen_5" value="&lt;b style=&quot;font-size:18px&quot;&gt;Fürs Verstehen merken&lt;/b&gt;&lt;br&gt;&lt;br&gt;Nicht jede sachliche Info ist ein Angriff. Die Absicht lässt sich nicht sicher aus einem Satz ablesen." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2EFFF;strokeColor=#8870B1;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="505" y="1050" width="365" height="150" />
+        </mxCell>
+        <mxCell id="axiome" value="&lt;b style=&quot;font-size:18px&quot;&gt;Die fünf Axiome&lt;/b&gt;&lt;br&gt;&lt;br&gt;Wenn Streit sich hochschaukelt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDF7F0;strokeColor=#5F9170;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="910" y="190" width="400" height="95" />
+        </mxCell>
+        <mxCell id="axiome_0" value="&lt;b style=&quot;font-size:18px&quot;&gt;1 Auch Schweigen wirkt&lt;/b&gt;&lt;br&gt;&lt;br&gt;Man kann nicht nicht kommunizieren. Auch Schweigen oder Wegschauen wirkt auf andere." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDF7F0;strokeColor=#5F9170;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="945" y="315" width="365" height="150" />
+        </mxCell>
+        <mxCell id="axiome_1" value="&lt;b style=&quot;font-size:18px&quot;&gt;2 Inhalt und Beziehung&lt;/b&gt;&lt;br&gt;&lt;br&gt;Es zählt, was gesagt wird und wie es beim anderen ankommt. „Die IP Adresse fehlt“ kann als Kritik an der Person verstanden werden." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDF7F0;strokeColor=#5F9170;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="945" y="483" width="365" height="170" />
+        </mxCell>
+        <mxCell id="axiome_2" value="&lt;b style=&quot;font-size:18px&quot;&gt;3 Ursache und Wirkung&lt;/b&gt;&lt;br&gt;&lt;br&gt;Reaktionen beeinflussen sich gegenseitig. Einer kontrolliert, der andere wird unsicher, dann wird noch mehr kontrolliert. Jeder sieht den anderen als Auslöser." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDF7F0;strokeColor=#5F9170;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="945" y="671" width="365" height="190" />
+        </mxCell>
+        <mxCell id="axiome_3" value="&lt;b style=&quot;font-size:18px&quot;&gt;4 Digital und analog&lt;/b&gt;&lt;br&gt;&lt;br&gt;Digital sind Worte und eindeutige Zeichen. Analog sind Tonfall, Mimik und Körpersprache. „Super“ mit Augenrollen wirkt anders. Digital heißt hier nicht Computer." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDF7F0;strokeColor=#5F9170;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="945" y="879" width="365" height="190" />
+        </mxCell>
+        <mxCell id="axiome_4" value="&lt;b style=&quot;font-size:18px&quot;&gt;5 Rollen im Gespräch&lt;/b&gt;&lt;br&gt;&lt;br&gt;Symmetrisch heißt auf Augenhöhe, etwa unter Kollegen. Komplementär heißt unterschiedliche, sich ergänzende Rollen, etwa Ausbilder und Azubi." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDF7F0;strokeColor=#5F9170;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="945" y="1087" width="365" height="175" />
+        </mxCell>
+        <mxCell id="ich" value="&lt;b style=&quot;font-size:18px&quot;&gt;Ich Botschaften&lt;/b&gt;&lt;br&gt;&lt;br&gt;Wenn du ein Problem ansprichst" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E8;strokeColor=#BC8D49;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1350" y="190" width="400" height="95" />
+        </mxCell>
+        <mxCell id="ich_0" value="&lt;b style=&quot;font-size:18px&quot;&gt;So baust du sie auf&lt;/b&gt;&lt;br&gt;&lt;br&gt;Was ist konkret passiert?&lt;br&gt;Wie betrifft mich das?&lt;br&gt;Was brauche ich?&lt;br&gt;Was soll sich ändern?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E8;strokeColor=#BC8D49;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1385" y="315" width="365" height="160" />
+        </mxCell>
+        <mxCell id="ich_1" value="&lt;b style=&quot;font-size:18px&quot;&gt;Beispiel aus der IT&lt;/b&gt;&lt;br&gt;&lt;br&gt;„In der Doku fehlt die Änderung. Ich kann den Fehler dadurch schwerer finden. Ich brauche die Angaben für die Fehlersuche. Bitte ergänze sie.“" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E8;strokeColor=#BC8D49;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1385" y="493" width="365" height="190" />
+        </mxCell>
+        <mxCell id="ich_2" value="&lt;b style=&quot;font-size:18px&quot;&gt;Vorwürfe vermeiden&lt;/b&gt;&lt;br&gt;&lt;br&gt;Keine pauschalen Vorwürfe mit „immer“ oder „nie“. Bleib bei der konkreten Situation und deiner eigenen Sicht." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E8;strokeColor=#BC8D49;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1385" y="701" width="365" height="160" />
+        </mxCell>
+        <mxCell id="ich_3" value="&lt;b style=&quot;font-size:18px&quot;&gt;Ein Ich reicht nicht&lt;/b&gt;&lt;br&gt;&lt;br&gt;„Ich finde, du bist faul“ bleibt ein Vorwurf. Die Formulierung soll das Problem beschreiben und eine Lösung nennen." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5E8;strokeColor=#BC8D49;strokeWidth=1.5;fontFamily=Arial;fontSize=17;fontColor=#17212B;align=left;verticalAlign=top;spacing=16;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1385" y="879" width="365" height="160" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
